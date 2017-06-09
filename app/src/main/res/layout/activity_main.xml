@@ -13,11 +13,11 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Aufgabe holen"
-        android:layout_marginTop="23dp"
-        android:layout_below="@+id/Geteilt"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Geteilt"
+        android:layout_marginTop="23dp"
+        android:text="Aufgaben holen" />
 
     <TextView
         android:layout_width="match_parent"
