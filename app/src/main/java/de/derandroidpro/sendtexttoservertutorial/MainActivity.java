@@ -1,5 +1,11 @@
 package de.derandroidpro.sendtexttoservertutorial;
 
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+
+import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -21,12 +27,38 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import java.io.StringReader;
+import java.io.StringWriter;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+import org.w3c.dom.Element;
+import java.io.File;
+
+import static android.content.Context.MODE_PRIVATE;
+
+
 public class MainActivity extends AppCompatActivity {
 
     EditText et;
     Button btn;
     TextView tv;
     int Art;
+    String xml;
 
 
     final String scripturlstring = "http://simon-f.com/receive_script.php";
@@ -90,6 +122,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                     Art = Art - 10000000;
                     sendToServer((""+ Art));
+
+                    try {
+                        createTask(xml);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                 } else {
                     Toast.makeText(getApplicationContext(), "Internet ist nicht verfügbar.", Toast.LENGTH_SHORT).show();
                 }
@@ -129,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
                             tv.setText(answer);
                         }
                     });
+                    xml = answer;
                     answerInputStream.close();
                     connection.disconnect();
 
@@ -165,4 +205,106 @@ public class MainActivity extends AppCompatActivity {
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnectedOrConnecting();
     }
+
+    private static String convertDocumentToString(Document doc) {
+        TransformerFactory tf = TransformerFactory.newInstance();
+        Transformer transformer;
+        try {
+            transformer = tf.newTransformer();
+            // below code to remove XML declaration
+            // transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            StringWriter writer = new StringWriter();
+            transformer.transform(new DOMSource(doc), new StreamResult(writer));
+            String output = writer.getBuffer().toString();
+            return output;
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private static Document convertStringToDocument(String xmlStr) {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder;
+        try
+        {
+            builder = factory.newDocumentBuilder();
+            Document doc = builder.parse( new InputSource( new StringReader( xmlStr ) ) );
+            return doc;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+    private void createTask(String xml) throws IOException {
+
+        String FILENAME = "Mappe1";
+
+
+        FileOutputStream fos = null;
+
+            fos = openFileOutput(FILENAME, MODE_PRIVATE);
+
+
+            fos.write(xml.getBytes());
+
+
+            fos.close();
+
+
+
+
+        /*
+        try {
+
+
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+
+
+            //optional, but recommended
+            //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
+            xml.getDocumentElement().normalize();
+
+
+
+            NodeList nList = xml.getElementsByTagName("aufgabe");
+
+
+
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+
+                Node nNode = nList.item(temp);
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                    Element eElement = (Element) nNode;
+
+
+
+
+                    System.out.println("Staff id : " + eElement.getAttribute("id"));
+                    System.out.println("First Name : " + eElement.getElementsByTagName("firstname").item(0).getTextContent());
+                    System.out.println("Last Name : " + eElement.getElementsByTagName("lastname").item(0).getTextContent());
+                    System.out.println("Nick Name : " + eElement.getElementsByTagName("nickname").item(0).getTextContent());
+                    System.out.println("Salary : " + eElement.getElementsByTagName("salary").item(0).getTextContent());
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    */
+
+    }
 }
+
+
+
+
