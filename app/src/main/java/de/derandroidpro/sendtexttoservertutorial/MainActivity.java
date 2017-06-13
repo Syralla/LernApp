@@ -1,6 +1,7 @@
 package de.derandroidpro.sendtexttoservertutorial;
 
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tv;
     int Art;
     String xml;
+    TextView test;
 
 
     final String scripturlstring = "http://simon-f.com/receive_script.php";
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         tv = (TextView) findViewById(R.id.textView);
+        test = (TextView) findViewById(R.id.test);
         btn = (Button) findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,11 +126,7 @@ public class MainActivity extends AppCompatActivity {
                     Art = Art - 10000000;
                     sendToServer((""+ Art));
 
-                    try {
-                        createTask(xml);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Internet ist nicht verfügbar.", Toast.LENGTH_SHORT).show();
@@ -161,14 +160,20 @@ public class MainActivity extends AppCompatActivity {
 
                     InputStream answerInputStream = connection.getInputStream();
                     final String answer = getTextFromInputStream(answerInputStream);
-
+                    xml = answer;
+                    final String aa = "aaaa";
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            tv.setText(answer);
+                            tv.setText(aa);
                         }
                     });
-                    xml = answer;
+
+                    try {
+                        createTask(xml);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     answerInputStream.close();
                     connection.disconnect();
 
@@ -240,12 +245,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void createTask(String xml) throws IOException {
+    public void createTask(String xml) throws IOException {
 
         String FILENAME = "Mappe1";
 
 
-        FileOutputStream fos = null;
+            FileOutputStream fos = null;
 
             fos = openFileOutput(FILENAME, MODE_PRIVATE);
 
@@ -254,6 +259,32 @@ public class MainActivity extends AppCompatActivity {
 
 
             fos.close();
+
+
+        FileInputStream fis = null;
+
+        fis = openFileInput(FILENAME);
+
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+        final StringBuilder out = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            out.append(line);   // add everything to StringBuilder
+            // here you can have your logic of comparison.
+            if(line.toString().equals(".")) {
+                // do something
+            }
+
+        }
+
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                test.setText(out);
+            }
+        });
 
 
 
