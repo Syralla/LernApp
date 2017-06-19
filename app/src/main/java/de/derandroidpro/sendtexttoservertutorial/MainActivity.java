@@ -49,6 +49,8 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -71,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         tv = (TextView) findViewById(R.id.textView);
         test = (TextView) findViewById(R.id.test);
         btn = (Button) findViewById(R.id.button);
@@ -80,51 +81,30 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(internetAvailable()){
 
-                    CheckBox Plus = (CheckBox) findViewById(R.id.PPlus);
-                    CheckBox Minus = (CheckBox) findViewById(R.id.Minus);
-                    CheckBox Mal = (CheckBox) findViewById(R.id.Mal);
-                    CheckBox Geteilt = (CheckBox) findViewById(R.id.Geteilt);
-                    CheckBox Eins = (CheckBox) findViewById(R.id.Ein);
-                    CheckBox Zwei = (CheckBox) findViewById(R.id.Zwei);
-                    CheckBox Drei = (CheckBox) findViewById(R.id.Drei);
-                    Art = 10000000;
+                    CheckBox plusBox = (CheckBox) findViewById(R.id.PPlus);
+                    CheckBox minusBox = (CheckBox) findViewById(R.id.Minus);
+                    CheckBox malBox = (CheckBox) findViewById(R.id.Mal);
+                    CheckBox geteiltBox = (CheckBox) findViewById(R.id.Geteilt);
+                    CheckBox einsBox = (CheckBox) findViewById(R.id.Ein);
+                    CheckBox zweiBox = (CheckBox) findViewById(R.id.Zwei);
+                    CheckBox dreiBox = (CheckBox) findViewById(R.id.Drei);
 
-                    if ( Plus.isChecked()) {
-                        Art = Art + 1000;
+                    boolean plus = plusBox.isChecked();
+                    boolean minus = minusBox.isChecked();
+                    boolean geteilt = geteiltBox.isChecked();
+                    boolean mal = malBox.isChecked();
 
+
+                    Aufgabe[] aufgaben = generateAufgabe(plus,minus,mal,geteilt);
+
+                    FileBuilder builder = new FileBuilder();
+
+                    for(Aufgabe aufgabe : aufgaben) {
+                        builder.addAufgabe(aufgabe);
                     }
 
-                    if ( Minus.isChecked()){
-                        Art = Art + 10000;
-
-                    }
-
-                    if ( Mal.isChecked() == true){
-                        Art = Art + 100000;
-
-                    }
-
-                    if ( Geteilt.isChecked() == true){
-                        Art = Art + 1000000;
-
-                    }
-
-                    if ( Eins.isChecked() == true){
-                        Art = Art + 1;
-
-                    }
-
-                    if ( Zwei.isChecked() == true){
-                        Art = Art + 10;
-
-                    }
-
-                    if ( Drei.isChecked() == true){
-                        Art = Art + 100;
-
-                    }
-                    Art = Art - 10000000;
-                    sendToServer((""+ Art));
+                    TestClient client = new TestClient();
+                    client.sendAufgabe(builder);
 
 
 
@@ -138,13 +118,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void sendToServer(final String text){
 
-
-
-
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
+                    System.out.println("Button pressed");
+
                     String textparam = "text1=" + URLEncoder.encode(text, "UTF-8");
 
                     URL scripturl = new URL(scripturlstring);
@@ -177,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
                     answerInputStream.close();
                     connection.disconnect();
 
-
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -185,7 +163,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }).start();
-
     }
 
     public String getTextFromInputStream(InputStream is){
@@ -254,9 +231,7 @@ public class MainActivity extends AppCompatActivity {
 
             fos = openFileOutput(FILENAME, MODE_PRIVATE);
 
-
             fos.write(xml.getBytes());
-
 
             fos.close();
 
@@ -285,6 +260,47 @@ public class MainActivity extends AppCompatActivity {
                 test.setText(out);
             }
         });
+
+        }
+
+    private Aufgabe[] generateAufgabe(boolean plus, boolean minus, boolean mal, boolean geteilt) {
+
+        Aufgabe[] aufgaben = new Aufgabe[5];
+
+        List<Operations> ops = new ArrayList<Operations>();
+
+        if(plus) {
+            ops.add(Operations.ADD);
+        }
+
+        if(minus) {
+            ops.add(Operations.SUB);
+        }
+
+        if(mal) {
+            ops.add(Operations.MUL);
+        }
+
+        if(geteilt) {
+            ops.add(Operations.DIV);
+        }
+
+        for(int i = 0; i < 5; i++) {
+
+            int op = ( (int) (Math.random() * ops.size()));
+
+            Operations finalOp = ops.get(op);
+
+            aufgaben[i] = new Aufgabe((int)(Math.random() * 100),(int)(Math.random() * 100), finalOp);
+
+        }
+
+
+        return aufgaben;
+    }
+
+
+
 
 
 
@@ -333,7 +349,7 @@ public class MainActivity extends AppCompatActivity {
 
     */
 
-    }
+
 }
 
 

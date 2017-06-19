@@ -1,45 +1,41 @@
 package de.derandroidpro.sendtexttoservertutorial;
 
-/**
- * Created by DEU301997 on 12.06.2017.
- */
+public class Aufgabe {
 
+	private int number1;
+	private int number2;
+	private Operations op;
 
+	public Aufgabe(int number1, int number2, Operations op) {
+		this.number1 = number1;
+		this.number2 = number2;
+		this.op = op;
+	}
 
+	public int getNumber1() {
+		return number1;
+	}
 
+	public void setNumber1(int number1) {
+		this.number1 = number1;
+	}
 
-public class Aufgabe{
+	public int getNumber2() {
+		return number2;
+	}
 
-    int Zahl1;
-    int Zahl2;
-    double Key;
+	public void setNumber2(int number2) {
+		this.number2 = number2;
+	}
 
+	public Operations getOp() {
+		return op;
+	}
 
-    public int getZahl1(){
-        return Zahl1;
-    }
+	public void setOp(Operations op) {
+		this.op = op;
+	}
 
-    public void setZahl1(int zahl1){
-        Zahl1 = zahl1;
-    }
-
-    public int getZahl2(){
-        return Zahl2;
-    }
-
-    public void setZahl2(int zahl2){
-        Zahl2 = zahl2;
-    }
-
-    public double getKey(){
-        return Key;
-    }
-
-    public void setKey(double key){
-        Key = key;
-    }
-
-
-
-
+	
+	
 }
