@@ -1,6 +1,8 @@
 package de.derandroidpro.sendtexttoservertutorial;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
 
 public class TestClient {
 
-	private String serverIP = "192.168.0.16";		// Surface IP, da Emulator Vm
+	private String serverIP = "141.72.133.85";		// Surface IP, da Emulator Vm
 	private int port = 8818;
 
 	public TestClient() {
@@ -22,14 +24,16 @@ public class TestClient {
 
 		Socket so = null;
 		PrintWriter pw = null;
+		BufferedReader br = null;
 
 		try {
 
 			so = new Socket(serverIP, port);
 
 			pw = new PrintWriter(so.getOutputStream());
+			br = new BufferedReader(new InputStreamReader(so.getInputStream()));
 
-			action.performAction(pw);
+			action.performAction(pw, br);
 
 			pw.flush();
 
@@ -43,6 +47,14 @@ public class TestClient {
 
 			} catch (IOException e) {
 				// ignore
+			}
+
+			if(br != null){
+				try {
+					br.close();
+				} catch (IOException e) {
+					//ignore
+				}
 			}
 
 			if(pw != null){
@@ -69,9 +81,12 @@ public class TestClient {
 				NetworkAction action = new NetworkAction() {
 
 					@Override
-					public void performAction(PrintWriter pw) {
+					public void performAction(PrintWriter pw, BufferedReader br) {
 
 						List<String> lines = builder.buildFileAsStringArray();
+
+						pw.println(0);//heist sende Aufgabe
+						pw.flush();
 
 						for (String line : lines) {
 							pw.println(line);
@@ -94,7 +109,7 @@ public class TestClient {
 		NetworkAction action = new NetworkAction() {
 
 			@Override
-			public void performAction(PrintWriter pw) {
+			public void performAction(PrintWriter pw, BufferedReader br) {
 				// TODO Auto-generated method stub
 				
 				String hello = "helloworld";
@@ -104,6 +119,21 @@ public class TestClient {
 			}
 		};
 		connectToServer(action);
+	}
+
+	public Statistics getStatisticsFromServer(){
+
+		NetworkAction action = new NetworkAction() {
+			@Override
+			public void performAction(PrintWriter pw, BufferedReader br) {
+
+				pw.print(1);//heist erwarte Statistik
+
+
+
+			}
+		};
+	return null;
 	}
 
 }
