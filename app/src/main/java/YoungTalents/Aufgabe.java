@@ -1,4 +1,4 @@
-package de.derandroidpro.sendtexttoservertutorial;
+package YoungTalents;
 
 public class Aufgabe {
 

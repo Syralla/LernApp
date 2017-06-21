@@ -1,4 +1,4 @@
-package de.derandroidpro.sendtexttoservertutorial;
+package YoungTalents;
 
 
 import java.io.FileInputStream;
@@ -247,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
         while ((line = reader.readLine()) != null) {
             out.append(line);   // add everything to StringBuilder
             // here you can have your logic of comparison.
-            if(line.toString().equals(".")) {
+            if(line.toString().equals("")) {
                 // do something
             }
 

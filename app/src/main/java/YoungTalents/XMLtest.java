@@ -1,4 +1,4 @@
-package de.derandroidpro.sendtexttoservertutorial;
+package YoungTalents;
 
 /**
  * Created by DEU301997 on 12.06.2017.

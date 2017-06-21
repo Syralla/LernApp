@@ -1,4 +1,4 @@
-package de.derandroidpro.sendtexttoservertutorial;
+package YoungTalents;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
