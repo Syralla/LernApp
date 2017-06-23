@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -53,6 +54,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -348,6 +366,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     */
+
+
+// ########################################Login###################################################################
+
+
 
 
 }

@@ -8,10 +8,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
 
-import core.Configuration;
-import core.Queue;
-import xml.Aufgabe;
-import xml.XMLParser;
+import YoungTalents.Configuration;
+import YoungTalents.Queue;
+import YoungTalents.Aufgabe;
+import YoungTalents.XMLParser;
 
 public class AppListener {
 
