@@ -12,7 +12,8 @@ import YoungTalents.NetworkAction;
 
 public class TestClient {
 
-	private String serverIP = "141.72.133.85";		// Surface IP, da Emulator Vm
+	//private String serverIP = "simon-f.com";
+	private String serverIP = "192.168.0.16";// Surface IP, da Emulator Vm
 	private int port = 8818;
 
 	public TestClient() {
@@ -103,6 +104,33 @@ public class TestClient {
 
     Thread t = new Thread(r);
         t.start();
+
+	}
+
+	public void recieveStatistic() {
+
+		System.out.println("Ziehe Statistik");
+
+		Runnable r = new Runnable(){
+
+			@Override
+			public void run() {
+				NetworkAction action = new NetworkAction() {
+
+					@Override
+					public void performAction(PrintWriter pw, BufferedReader br) {
+
+
+
+					}
+				};
+
+				connectToServer(action);	// Interface in "L�cke" speichern
+			}
+		};
+
+		Thread t = new Thread(r);
+		t.start();
 
 	}
 

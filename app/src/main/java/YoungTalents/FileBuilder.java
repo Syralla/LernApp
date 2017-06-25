@@ -31,9 +31,9 @@ public class FileBuilder {
 			
 			String taskLine = xmlPartTemplate;
 			taskLine = taskLine.replace("${zahl1}", aufgabe.getNumber1() + "");
-			taskLine = taskLine.replace("${zahl2}", aufgabe.getNumber1() + "");
-			taskLine = taskLine.replace("${operation}", aufgabe.getNumber1() + "");
-			
+			taskLine = taskLine.replace("${zahl2}", aufgabe.getNumber2() + "");
+			taskLine = taskLine.replace("${operation}", aufgabe.getOp() + "");
+
 			lines.add(taskLine);
 		}
 		

@@ -3,7 +3,7 @@ package YoungTalents;
 import java.util.ArrayList;
 import java.util.List;
 
-import xml.Aufgabe;
+import YoungTalents.Aufgabe;
 
 public class Queue implements Runnable {
 
