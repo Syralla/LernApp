@@ -1,9 +1,7 @@
-package YoungTalents;
+package youngtalents;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import YoungTalents.Aufgabe;
 
 public class Queue implements Runnable {
 

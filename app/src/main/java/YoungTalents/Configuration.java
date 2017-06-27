@@ -1,4 +1,4 @@
-package YoungTalents;
+package youngtalents;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,8 +8,8 @@ import java.util.Properties;
 
 public class Configuration {
 
-//	public static String serverIP = "0.0.0.0";
-	public static int serverPort = 8818;
+	public static String serverIP = "simon-f.com";
+	public static int serverPort = 8080;
 	public static String DBIP = "127.0.0.1";
 	public static String DBUSER = "";
 	public static String DBPW = "";

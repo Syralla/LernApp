@@ -1,4 +1,4 @@
-package YoungTalents;
+package youngtalents;
 
 /**
  * Created by Samara on 19.06.2017.
