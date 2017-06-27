@@ -1,4 +1,4 @@
-package YoungTalents;
+package youngtalents;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,14 +7,12 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 
-import YoungTalents.NetworkAction;
-
 
 public class TestClient {
 
 	//private String serverIP = "simon-f.com";
-	private String serverIP = "192.168.0.16";// Surface IP, da Emulator Vm
-	private int port = 8818;
+	private String serverIP = "simon-f.com";// Surface IP, da Emulator Vm
+	private int port = 8080;
 
 	public TestClient() {
 		// TODO Auto-generated constructor stub

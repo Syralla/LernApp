@@ -1,4 +1,4 @@
-package YoungTalents;
+package youngtalents;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,11 +7,6 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
-
-import YoungTalents.Configuration;
-import YoungTalents.Queue;
-import YoungTalents.Aufgabe;
-import YoungTalents.XMLParser;
 
 public class AppListener {
 

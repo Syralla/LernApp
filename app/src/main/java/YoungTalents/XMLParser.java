@@ -1,4 +1,4 @@
-package YoungTalents;
+package youngtalents;
 
 import java.util.ArrayList;
 import java.util.List;

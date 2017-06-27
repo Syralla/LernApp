@@ -1,6 +1,4 @@
-package YoungTalents;
-
-import YoungTalents.AppListener;
+package youngtalents;
 
 public class Server {
 

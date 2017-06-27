@@ -1,13 +1,9 @@
-package YoungTalents;
+package youngtalents;
 
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 
-import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -34,7 +30,6 @@ import java.io.StringWriter;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -43,34 +38,9 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
-import org.w3c.dom.Element;
-import java.io.File;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.Context.MODE_PRIVATE;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-
-
 
 
 public class MainActivity extends AppCompatActivity {
@@ -166,11 +136,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 
-                    try {
-                        createTask(xml);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+
                     answerInputStream.close();
                     connection.disconnect();
 
@@ -206,40 +172,14 @@ public class MainActivity extends AppCompatActivity {
         return networkInfo != null && networkInfo.isConnectedOrConnecting();
     }
 
-    private static String convertDocumentToString(Document doc) {
-        TransformerFactory tf = TransformerFactory.newInstance();
-        Transformer transformer;
-        try {
-            transformer = tf.newTransformer();
-            // below code to remove XML declaration
-            // transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-            StringWriter writer = new StringWriter();
-            transformer.transform(new DOMSource(doc), new StreamResult(writer));
-            String output = writer.getBuffer().toString();
-            return output;
-        } catch (TransformerException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    private static Document convertStringToDocument(String xmlStr) {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder;
-        try
-        {
-            builder = factory.newDocumentBuilder();
-            Document doc = builder.parse( new InputSource( new StringReader( xmlStr ) ) );
-            return doc;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
 
 
+
+
+
+    //<editor-fold desc="Description">
+    /*
     public void createTask(String xml) throws IOException {
 
         String FILENAME = "Mappe1";
@@ -280,10 +220,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         }
+    //</editor-fold>
+    */
 
     private Aufgabe[] generateAufgabe(boolean plus, boolean minus, boolean mal, boolean geteilt) {
 
-        Aufgabe[] aufgaben = new Aufgabe[5];
+        Aufgabe[] aufgaben = new Aufgabe[20];
 
         List<Operations> ops = new ArrayList<Operations>();
 
@@ -303,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
             ops.add(Operations.DIV);
         }
 
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 20; i++) {
 
             int op = ( (int) (Math.random() * ops.size()));
 

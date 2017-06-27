@@ -1,6 +1,4 @@
-package YoungTalents;
-
-import YoungTalents.TestClient;
+package youngtalents;
 
 public class ServerMain {
 

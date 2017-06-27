@@ -1,4 +1,4 @@
-package YoungTalents;
+package youngtalents;
 
 public class Aufgabe {
 
