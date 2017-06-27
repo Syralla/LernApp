@@ -19,6 +19,10 @@
 
     <string name="registration_success">Du bist nun erfolgreich registriert.</string>
 
+    <string name="logout_success">Du bist nun ausgeloggt.</string>
+
+    <string name="login_again">Klicke hier, um zu Dich wieder einzuloggen.</string>
+
     <string name="follow_button">Klicke hier, um zu Deinem Menü zu gelangen.</string>
 
     <string name="mainmenu">Willkommen in Deinem Hauptmenü!</string>
@@ -31,7 +35,7 @@
 
     <string name="is_login">Du bist nun eingeloggt</string>
 
-    <string name="sign_up">Registriere dich jetzt</string>
+    <string name="sign_up">Registriere Dich jetzt</string>
 
 </resources>
 

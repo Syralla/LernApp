@@ -24,8 +24,9 @@
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="61dp"
         android:text="Aufgabenpaket erstellen"
+        android:layout_below="@+id/Drei"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -47,114 +48,98 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/Aufgabe"
-        android:ems="6"
-        android:inputType="number"
-        android:textColor="#ffffff"/>
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ergebnis:"
-        android:layout_alignTop="@+id/editText2"
-        android:layout_toLeftOf="@+id/editText2"
-        android:layout_toStartOf="@+id/editText2"
-        android:textColor="#ffffff"
-        android:textSize="16sp"/>
-
     <CheckBox
         android:id="@+id/PPlus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/Aufgabe"
         android:text="Plus"
         android:textColor="#ffffff"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:layout_marginTop="19dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/Aufgabe"
+        android:layout_toEndOf="@+id/Aufgabe" />
 
     <CheckBox
         android:id="@+id/Minus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/PPlus"
         android:text="Minus"
         android:textColor="#ffffff"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_alignBaseline="@+id/PPlus"
+        android:layout_alignBottom="@+id/PPlus"
+        android:layout_toRightOf="@+id/PPlus"
+        android:layout_toEndOf="@+id/PPlus" />
 
     <CheckBox
         android:id="@+id/Mal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mal"
-        android:layout_below="@+id/Minus"
-        android:layout_toRightOf="@+id/Aufgabe"
-        android:layout_toEndOf="@+id/Aufgabe"
         android:textColor="#ffffff"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/Minus"
+        android:layout_alignBottom="@+id/Minus"
+        android:layout_toLeftOf="@+id/Geteilt"
+        android:layout_toStartOf="@+id/Geteilt"
+        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp" />
 
     <CheckBox
         android:id="@+id/Geteilt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Mal"
-        android:layout_toEndOf="@+id/Aufgabe"
-        android:layout_toRightOf="@+id/Aufgabe"
         android:text="Geteilt"
         android:textColor="#ffffff"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/Mal"
+        android:layout_alignBottom="@+id/Mal"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <CheckBox
         android:id="@+id/Drei"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Zwei"
-        android:layout_alignStart="@+id/Zwei"
-        android:layout_below="@+id/Zwei"
         android:text="100-999"
         android:textColor="#ffffff"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:layout_marginLeft="31dp"
+        android:layout_marginStart="31dp"
+        android:layout_alignBaseline="@+id/Zwei"
+        android:layout_alignBottom="@+id/Zwei"
+        android:layout_alignLeft="@+id/Mal"
+        android:layout_alignStart="@+id/Mal" />
 
     <CheckBox
         android:id="@+id/Ein"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView4"
         android:text="0-9"
         android:textColor="#ffffff"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+
+
+        android:layout_alignBaseline="@+id/Zwei"
+        android:layout_alignBottom="@+id/Zwei"
+        android:layout_toLeftOf="@+id/Zwei"
+        android:layout_toStartOf="@+id/Zwei"
+        android:layout_marginRight="24dp"
+        android:layout_marginEnd="24dp" />
 
     <CheckBox
         android:id="@+id/Zwei"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Ein"
-        android:layout_alignStart="@+id/Ein"
-        android:layout_below="@+id/Ein"
         android:text="10-99"
         android:textColor="#ffffff"
-        android:textSize="20sp"/>
-
-    <TextView
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText2"
-        android:layout_marginLeft="35dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="41dp"
-        android:layout_toEndOf="@+id/Aufgabe"
-        android:layout_toRightOf="@+id/Aufgabe"
-        android:text="test" />
+        android:textSize="20sp"
+        android:layout_marginTop="53dp"
+        android:layout_below="@+id/Minus"
+        android:layout_toLeftOf="@+id/Drei"
+        android:layout_toStartOf="@+id/Drei" />
 
 </RelativeLayout>

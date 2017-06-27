@@ -51,65 +51,57 @@
     <Button
 
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
-
         android:text="Aufgabenpaket bearbeiten"
-
         android:id="@+id/edittasks"
-
         android:layout_below="@id/mainmenu"
-
         android:layout_centerHorizontal="true"
-
-        android:layout_marginTop="52dp" />
+        android:layout_marginTop="42dp"
+        android:layout_weight="1"
+        />
 
     <Button
 
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
-
         android:text="Aufgabenpaket erstellen"
-
         android:id="@+id/createtasks"
-
         android:layout_marginTop="42dp"
         android:layout_below="@+id/edittasks"
-        android:layout_centerHorizontal="true" />
+        android:layout_weight="1"
+        android:layout_alignRight="@+id/edittasks"
+        android:layout_alignEnd="@+id/edittasks"
+        android:layout_alignLeft="@+id/edittasks"
+        android:layout_alignStart="@+id/edittasks" />
 
 
     <Button
 
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
-
         android:text="Statistik"
-
         android:id="@+id/statistic"
-
         android:layout_below="@+id/createtasks"
+        android:layout_marginTop="42dp"
+        android:layout_weight="1"
 
-        android:layout_centerHorizontal="true"
-
-        android:layout_marginTop="42dp" />
+        android:layout_alignLeft="@+id/createtasks"
+        android:layout_alignStart="@+id/createtasks"
+        android:layout_alignRight="@+id/createtasks"
+        android:layout_alignEnd="@+id/createtasks" />
 
     <Button
 
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
-
         android:text="Ausloggen"
-
         android:id="@+id/logout"
-
-        android:layout_below
-            ="@+id/statistic"
-
-        android:layout_centerHorizontal="true"
-
-        android:layout_marginTop="42dp" />
+        android:layout_below="@+id/statistic"
+        android:layout_marginTop="42dp"
+        android:layout_weight="1"
+        android:layout_alignLeft="@+id/statistic"
+        android:layout_alignStart="@+id/statistic"
+        android:layout_alignRight="@+id/statistic"
+        android:layout_alignEnd="@+id/statistic" />
 
 </RelativeLayout>
