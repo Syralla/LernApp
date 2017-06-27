@@ -1,8 +1,28 @@
 apply plugin: 'com.android.application'
 
+
+allprojects {
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = "1.7"
+        targetCompatibility = "1.7"
+    }
+}
+
+
 android {
+
+    //snippet
+//add this into your existing 'android' block
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+//snip
     compileSdkVersion 23
     buildToolsVersion '25.0.0'
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
 
     defaultConfig {
         applicationId "de.derandroidpro.sendtexttoservertutorial"
@@ -24,4 +44,16 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'org.jsoup:jsoup:1.10.3'
     compile 'org.apache:apache:18'
+}
+
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+allprojects {
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = "1.7"
+        targetCompatibility = "1.7"
+    }
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<aufgabe>
+	<zahl1>50</zahl1>
+	<zahl2>68</zahl2>
+	<operation>addition</operation>
+</aufgabe>
+<aufgabe>
+	<zahl1>78</zahl1>
+	<zahl2>5</zahl2>
+	<operation>subtraktion</operation>
+</aufgabe>
+<aufgabe>
+	<zahl1>5</zahl1>
+	<zahl2>6</zahl2>
+	<operation>addition</operation>
+</aufgabe>
+<aufgabe>
+	<zahl1>110</zahl1>
+	<zahl2>12</zahl2>
+	<operation>subtraktion</operation>
+</aufgabe>
+
+
+
+
