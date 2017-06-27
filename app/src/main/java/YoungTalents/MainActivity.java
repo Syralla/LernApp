@@ -45,12 +45,12 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText et;
+    EditText user;
+    EditText pasw;
     Button btn;
-    TextView tv;
-    int Art;
+
     String xml;
-    TextView test;
+
 
 
     final String scripturlstring = "http://simon-f.com/receive_script.php";
@@ -59,15 +59,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         System.out.println("Point one");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login_layout);
 
-        tv = (TextView) findViewById(R.id.textView);
-        test = (TextView) findViewById(R.id.test);
-        btn = (Button) findViewById(R.id.button);
+        user = (EditText) findViewById(R.id.username_field);
+        pasw = (EditText) findViewById(R.id.password_field);
+        btn = (Button) findViewById(R.id.login);
+
+
+
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(internetAvailable()){
+                    System.out.println("Clicked");
+                /*
 
                     CheckBox plusBox = (CheckBox) findViewById(R.id.PPlus);
                     CheckBox minusBox = (CheckBox) findViewById(R.id.Minus);
@@ -89,10 +95,17 @@ public class MainActivity extends AppCompatActivity {
 
                     for(Aufgabe aufgabe : aufgaben) {
                         builder.addAufgabe(aufgabe);
+
                     }
+                    */
+                    System.out.println(user.getText().toString());
+
+                    FileBuilder builder = new FileBuilder();
+
 
                     TestClient client = new TestClient();
-                    client.sendAufgabe(builder);
+                    //client.sendAufgabe(builder);
+                    client.Login(builder.buildLoginAsStringArray(user.getText().toString(), pasw.getText().toString()));
 
 
 
@@ -102,8 +115,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         System.out.println("Point two");
-    }
 
+
+    }
+/*
     public void sendToServer(final String text){
 
         new Thread(new Runnable() {
@@ -148,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
     }
-
+    */
     public String getTextFromInputStream(InputStream is){
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder stringBuilder = new StringBuilder();

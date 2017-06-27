@@ -8,6 +8,7 @@ public class FileBuilder {
 	private List<Aufgabe> aufgaben = new ArrayList<Aufgabe>();
 	
 	String xmlPartTemplate = "<aufgabe><zahl1>${zahl1}</zahl1><zahl2>${zahl2}</zahl2><operation>${operation}</operation></aufgabe>";
+	String xmlLoginTemplate = "<login><user>${user}</user><pasw>${pasw}</pasw></login>";
 	
 	public FileBuilder() {
 		// TODO Auto-generated constructor stub
@@ -38,6 +39,18 @@ public class FileBuilder {
 		}
 		
 		
+		return lines;
+	}
+
+	public List<String> buildLoginAsStringArray(String u, String p){
+		List<String> lines = new ArrayList<String>();
+
+		lines.add("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+			String taskLine = xmlLoginTemplate;
+		taskLine = taskLine.replace("${user}", u + "");
+		taskLine = taskLine.replace("${pasw}", p + "");
+
+		lines.add(taskLine);
 		return lines;
 	}
 	
