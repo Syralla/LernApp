@@ -197,4 +197,37 @@ public class TestClient {
 
 	}
 
+
+	public void Register(final List<String> line) {
+
+		System.out.println("Sende Login");
+
+		Runnable r = new Runnable(){
+
+			@Override
+			public void run() {
+				NetworkAction action = new NetworkAction() {
+
+					@Override
+					public void performAction(PrintWriter pw, BufferedReader br) {
+
+
+
+						pw.println(3);//heist sende Register
+						pw.flush();
+						pw.println(line);
+
+
+					}
+				};
+
+				connectToServer(action);	// Interface in "L�cke" speichern
+			}
+		};
+
+		Thread t = new Thread(r);
+		t.start();
+
+	}
+
 }

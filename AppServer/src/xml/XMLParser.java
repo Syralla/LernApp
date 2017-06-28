@@ -38,6 +38,55 @@ public class XMLParser {
 		
 		return list;
 	 }
+	
+	public List<String> parseRegister(String xmlFile){
+		
+		List<String> list = new ArrayList<String>();
+		
+		Document doc = Jsoup.parse(xmlFile, "", Parser.xmlParser());
+		for (Element e : doc.select("register")) {
+			String user = "";
+			String pasw = "";
+			String email =  "";
+			
+			user = e.select("user").text();
+			pasw = e.select("pasw").text();
+			email = e.select("email").text();
+			
+
+		 
+		    list.add(new String(user));
+		    list.add(new String(pasw));
+		    list.add(new String(email));
+		}
+		
+		
+		
+		return list;
+	}
+	
+	public List<String> parseLogin(String xmlFile){
+		
+		List<String> list = new ArrayList<String>();
+		
+		Document doc = Jsoup.parse(xmlFile, "", Parser.xmlParser());
+		for (Element e : doc.select("login")) {
+			String user = "";
+			String pasw = "";
+			
+			user = e.select("user").text();
+			pasw = e.select("pasw").text();
+			
+
+		 
+		    list.add(new String(user));
+		    list.add(new String(pasw));
+		}
+		
+		
+		
+		return list;
+	}
 
 	private Operations parseOperation(String opString) {
 

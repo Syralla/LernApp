@@ -1,43 +1,20 @@
 package youngtalents;
 
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-
-import java.io.StringReader;
-import java.io.StringWriter;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     EditText user;
     EditText pasw;
     Button btn;
+    Button reg;
 
     String xml;
 
@@ -61,9 +39,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
 
-        user = (EditText) findViewById(R.id.username_field);
-        pasw = (EditText) findViewById(R.id.password_field);
+        user = (EditText) findViewById(R.id.username_field_r);
+        pasw = (EditText) findViewById(R.id.password_field_r);
         btn = (Button) findViewById(R.id.login);
+        reg = (Button) findViewById(R.id.register_button);
 
 
 
@@ -114,6 +93,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+                reg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent myIntent = new Intent(v.getContext(), Register.class);
+                        startActivityForResult(myIntent, 0);
+                    }
+                });
+
+
+
         System.out.println("Point two");
 
 

@@ -9,6 +9,7 @@ public class FileBuilder {
 	
 	String xmlPartTemplate = "<aufgabe><zahl1>${zahl1}</zahl1><zahl2>${zahl2}</zahl2><operation>${operation}</operation></aufgabe>";
 	String xmlLoginTemplate = "<login><user>${user}</user><pasw>${pasw}</pasw></login>";
+	String xmlRegisterTemplate = "<register><user>${user}</user><pasw>${pasw}</pasw><email>${email}</email></register>";
 	
 	public FileBuilder() {
 		// TODO Auto-generated constructor stub
@@ -49,6 +50,19 @@ public class FileBuilder {
 			String taskLine = xmlLoginTemplate;
 		taskLine = taskLine.replace("${user}", u + "");
 		taskLine = taskLine.replace("${pasw}", p + "");
+
+		lines.add(taskLine);
+		return lines;
+	}
+
+	public List<String> buildRegisterAsStringArray(String u, String p, String e){
+		List<String> lines = new ArrayList<String>();
+
+		lines.add("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+		String taskLine = xmlRegisterTemplate;
+		taskLine = taskLine.replace("${user}", u + "");
+		taskLine = taskLine.replace("${pasw}", p + "");
+		taskLine = taskLine.replace("${email}", e + "");
 
 		lines.add(taskLine);
 		return lines;
