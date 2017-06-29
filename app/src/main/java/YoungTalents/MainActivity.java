@@ -1,43 +1,20 @@
 package youngtalents;
 
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-
-import java.io.StringReader;
-import java.io.StringWriter;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,12 +22,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText et;
+    EditText user;
+    EditText pasw;
     Button btn;
-    TextView tv;
-    int Art;
+    Button reg;
+
     String xml;
-    TextView test;
+
 
 
     final String scripturlstring = "http://simon-f.com/receive_script.php";
@@ -59,15 +37,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         System.out.println("Point one");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login_layout);
 
-        tv = (TextView) findViewById(R.id.textView);
-        test = (TextView) findViewById(R.id.test);
-        btn = (Button) findViewById(R.id.button);
+        user = (EditText) findViewById(R.id.username_field_r);
+        pasw = (EditText) findViewById(R.id.password_field_r);
+        btn = (Button) findViewById(R.id.login);
+        reg = (Button) findViewById(R.id.register_button);
+
+
+
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(internetAvailable()){
+                    System.out.println("Clicked");
+                /*
 
                     CheckBox plusBox = (CheckBox) findViewById(R.id.PPlus);
                     CheckBox minusBox = (CheckBox) findViewById(R.id.Minus);
@@ -89,10 +74,17 @@ public class MainActivity extends AppCompatActivity {
 
                     for(Aufgabe aufgabe : aufgaben) {
                         builder.addAufgabe(aufgabe);
+
                     }
+                    */
+                    System.out.println(user.getText().toString());
+
+                    FileBuilder builder = new FileBuilder();
+
 
                     TestClient client = new TestClient();
-                    client.sendAufgabe(builder);
+                    //client.sendAufgabe(builder);
+                    client.Login(builder.buildLoginAsStringArray(user.getText().toString(), pasw.getText().toString()));
 
 
 
@@ -101,9 +93,23 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        System.out.println("Point two");
-    }
 
+
+                reg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent myIntent = new Intent(v.getContext(), Register.class);
+                        startActivityForResult(myIntent, 0);
+                    }
+                });
+
+
+
+        System.out.println("Point two");
+
+
+    }
+/*
     public void sendToServer(final String text){
 
         new Thread(new Runnable() {
@@ -148,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
     }
-
+    */
     public String getTextFromInputStream(InputStream is){
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder stringBuilder = new StringBuilder();
