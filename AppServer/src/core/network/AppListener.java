@@ -6,8 +6,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import core.Configuration;
@@ -123,8 +126,7 @@ public class AppListener {
 		String xmlFile = "";
 		String user = "";
 		String pasw = "";
-		String sql = "";
-		ResultSet rs = null;
+		
 		
 		for (String line = null; (line = br.readLine()) != null;){
 			xmlFile = xmlFile + line;
@@ -136,11 +138,37 @@ public class AppListener {
 		
 		user = list.get(0);
 		pasw = list.get(1);
-		DBConnector db = new DBConnector();
-		sql = "SELECT * FROM user WHERE user = '" + user + "' AND pasw = '" + pasw + "';";
-		rs = db.select(sql);
 		
-		while (rs.next()){ //Wenn ein Resultset vorhanden ist wird ein success zurück gesendet an die App
+		String SQLIP = "jdbc:mysql://localhost:3306/Lernapp";
+		String DBUSER = "root";
+		 String DBPW = "LernApp";
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		String sql1 = "SELECT * FROM user WHERE user = '" + user + "' AND pasw = '" + pasw + "';";
+		
+		
+		try {
+			// 1. Get a connection to database
+			myConn = DriverManager.getConnection(SQLIP, DBUSER , DBPW);
+			
+			// 2. Create a statement
+			myStmt = myConn.createStatement();
+			
+			// 3. Execute SQL query
+			myRs = myStmt.executeQuery(sql1);
+			
+			// 4. Process the result set
+			
+		}
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		
+		
+		
+		
+		while (myRs.next()){ //Wenn ein Resultset vorhanden ist wird ein success zurück gesendet an die App
 			
 			
 			System.out.println("Login geglückt");
@@ -167,6 +195,7 @@ public class AppListener {
 		user = list.get(0);
 		pasw = list.get(1);
 		email = list.get(2);
+		
 		
 		DBConnector db = new DBConnector();
 		sql = "INSERT INTO user (user, pasw, email) VALUES ('" + user + "', '" + pasw + "', '" + email + "');";
