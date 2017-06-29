@@ -25,9 +25,9 @@
 
         android:layout_height="wrap_content"
 
-        android:text="Hier findest Du Deine Arbeitspakete:"
+        android:text="Hier findest Du Deine Aufgabenpakete"
 
-        android:id="@+id/mainmenu"
+        android:id="@+id/aufgabenpaket_view"
 
         android:textColor="#ffffff"
 
@@ -52,9 +52,9 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Arbeitspaket 1"
+        android:text="Aufgabenpaket 1"
         android:id="@+id/paket1"
-        android:layout_below="@id/mainmenu"
+        android:layout_below="@id/aufgabenpaket_view"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:layout_weight="1"
@@ -64,7 +64,7 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Arbeitspaket 2"
+        android:text="Aufgabenpaket 2"
         android:id="@+id/paket2"
         android:layout_marginTop="31dp"
         android:layout_weight="1"
@@ -76,7 +76,7 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Arbeitspaket 3"
+        android:text="Aufgabenpaket 3"
         android:id="@+id/paket3"
         android:layout_marginTop="30dp"
         android:layout_weight="1"

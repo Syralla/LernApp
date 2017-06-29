@@ -19,6 +19,19 @@
 
     tools:context=".MainActivity">
 
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aufgabe"
+        android:id="@+id/task"
+        android:textColor="#ffffff"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:layout_marginBottom="52dp"
+        android:layout_above="@+id/result"
+        android:layout_centerHorizontal="true" />
+
     <EditText
         android:id="@+id/result"
         android:layout_width="wrap_content"
@@ -41,9 +54,9 @@
         android:text="Ergebnis:"
         android:textColor="#ffffff"
         android:textSize="20sp"
-        android:layout_marginBottom="43dp"
-        android:layout_marginLeft="65dp"
-        android:layout_marginStart="65dp"
+        android:layout_marginBottom="64dp"
+        android:layout_marginLeft="66dp"
+        android:layout_marginStart="66dp"
         android:layout_above="@+id/button"
         android:layout_toRightOf="@+id/Aufgabe"
         android:layout_toEndOf="@+id/Aufgabe" />
