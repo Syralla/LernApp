@@ -3,6 +3,7 @@ package core.network;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -66,13 +67,19 @@ public class AppListener {
 					readTasks(br);
 					break;
 				case 1: //PushStatistic
-					pushStatistics(pw);
+					//pushStatistics(pw);
 					break;
 				case 2: //Login
-					Login(br);
+					//if(Login(br) == true){
+						PrintStream p = new PrintStream(so.getOutputStream());
+						p.println("true");
+						System.out.println("true");
+						p.flush();
+						p.close();
+					//};
 					break;
 				case 3: //Register
-					Register(br);
+					//Register(br);
 					break;
 				}
 
@@ -122,7 +129,7 @@ public class AppListener {
 
 	}
 	//Login Methode
-	private void Login(BufferedReader br) throws IOException, SQLException{
+	private boolean Login(BufferedReader br) throws IOException, SQLException{
 		String xmlFile = "";
 		String user = "";
 		String pasw = "";
@@ -170,10 +177,12 @@ public class AppListener {
 		
 		while (myRs.next()){ //Wenn ein Resultset vorhanden ist wird ein success zurück gesendet an die App
 			
+			return true;
 			
-			System.out.println("Login geglückt");
 			
 		}
+		
+		return false;
 	}
 	
 	private void Register(BufferedReader br) throws IOException, SQLException{
@@ -196,10 +205,13 @@ public class AppListener {
 		pasw = list.get(1);
 		email = list.get(2);
 		
+		if(user != null && pasw != null && email != null){
+			
 		
 		DBConnector db = new DBConnector();
 		sql = "INSERT INTO user (user, pasw, email) VALUES ('" + user + "', '" + pasw + "', '" + email + "');";
 		db.insert(sql);
+		}
 		
 	}
 }

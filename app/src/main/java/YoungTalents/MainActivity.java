@@ -84,8 +84,23 @@ public class MainActivity extends AppCompatActivity {
 
                     TestClient client = new TestClient();
                     //client.sendAufgabe(builder);
-                    client.Login(builder.buildLoginAsStringArray(user.getText().toString(), pasw.getText().toString()));
+                    try {
+                       if(client.Login(builder.buildLoginAsStringArray(user.getText().toString(), pasw.getText().toString())) == true){
+                           Intent myIntent = new Intent(v.getContext(), MainMenu.class);
+                           startActivityForResult(myIntent, 0);
 
+                      }
+                       else{
+
+
+
+
+
+                           /////Popup for false login
+                       }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
 
                 } else {

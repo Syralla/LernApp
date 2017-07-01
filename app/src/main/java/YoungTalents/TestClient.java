@@ -1,5 +1,6 @@
 package youngtalents;
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,11 +9,13 @@ import java.net.Socket;
 import java.util.List;
 
 
+
 public class TestClient {
 
 	//private String serverIP = "simon-f.com";
 	private String serverIP = "simon-f.com";// Surface IP, da Emulator Vm
 	private int port = 8080;
+	public static boolean ret = false;
 
 	public TestClient() {
 		// TODO Auto-generated constructor stub
@@ -30,6 +33,7 @@ public class TestClient {
 		try {
 
 			so = new Socket(serverIP, port);
+			so.setSoTimeout(10000);
 
 			pw = new PrintWriter(so.getOutputStream());
 			br = new BufferedReader(new InputStreamReader(so.getInputStream()));
@@ -165,36 +169,57 @@ public class TestClient {
 	}
 
 
-	public void Login(final List<String> line) {
+	public boolean Login(final List<String> line) throws IOException {
 
 		System.out.println("Sende Login");
+
 
 		Runnable r = new Runnable(){
 
 			@Override
 			public void run() {
+				TestClient.ret = false;
 				NetworkAction action = new NetworkAction() {
 
 					@Override
-					public void performAction(PrintWriter pw, BufferedReader br) {
-
-
-
+					public void performAction(PrintWriter pw, BufferedReader br) throws IOException {
 						pw.println(2);//heist sende Login
 						pw.flush();
 						pw.println(line);
+						String in = br.readLine();
+						System.out.println(in);
+						System.out.println("in test");
+							if (in.contains("true") == true) {
+								System.out.println(TestClient.ret);
+								TestClient.ret = true;
+								System.out.println(TestClient.ret);
+
+
+							} else {
+
+							}
+
 
 
 					}
 				};
-
 				connectToServer(action);	// Interface in "L�cke" speichern
-			}
-		};
+				System.out.println(TestClient.ret);
 
+
+
+
+			}
+
+		};
+		System.out.println("test return");
 		Thread t = new Thread(r);
 		t.start();
+		while (t.isAlive()){
 
+		}
+
+		return TestClient.ret;
 	}
 
 
