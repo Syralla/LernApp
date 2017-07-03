@@ -1,5 +1,21 @@
 package youngtalents;
 
+/*
+Todo:
+
+- Vom CLient zum Server schicken das er eine Aufgabenmappe will mit den spezifizierten Eigenschaften
+- Auf dem Server die Aufgaben demnach generieren und als xml/json zurück an den Client schicken
+- Auf der Client Seite die Aufgaben empfangen und local als xml abspeichern (der Code dafür ist schon vorhanden)
+- Die Aufgaben aufrufen über den Mappen Screen
+- Aufgaben bearbeiten und Ergebnisse an den Server schicken (Kategorieschlüssel + richtig/falsch)
+- Statistisk in der Datenbank Benutzerspezifisch abspeichern
+- Statistik vom Server an den Client schicken und darstellen
+
+
+
+
+ */
+
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
