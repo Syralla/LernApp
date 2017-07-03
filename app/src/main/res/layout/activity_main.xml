@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bitte wähle mindestens eine Rechenart und eine Zahlenkategorie:"
-        android:id="@+id/aufgabenpaket_view"
+        android:id="@+id/checkbox_view"
         android:textColor="#ffffff"
         android:textSize="20sp"
         android:layout_marginTop="20dp"
