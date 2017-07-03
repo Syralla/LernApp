@@ -22,8 +22,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:text="Bitte wähle mindestens eine Rechenart und eine Zahlenkategorie:"
         android:id="@+id/checkbox_view"
+=======
+        android:text="Bitte wähle mindestens eine Rechenart und eine Zahlenkategorie"
+>>>>>>> 34807df73e5659cbdd364e0af4158e8a71528f28
         android:textColor="#ffffff"
         android:textSize="20sp"
         android:layout_marginTop="20dp"
