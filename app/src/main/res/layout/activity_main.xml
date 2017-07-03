@@ -27,6 +27,7 @@
         android:id="@+id/checkbox_view"
 =======
         android:text="Bitte wähle mindestens eine Rechenart und eine Zahlenkategorie"
+        android:id="@+id/aufgabenpaket_view"
 >>>>>>> 34807df73e5659cbdd364e0af4158e8a71528f28
         android:textColor="#ffffff"
         android:textSize="20sp"
