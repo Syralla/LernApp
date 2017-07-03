@@ -20,6 +20,10 @@
             </intent-filter>
         </activity>
         <activity android:name="youngtalents.Register"></activity>
+        <activity android:name="youngtalents.MainMenu"></activity>
+        <activity android:name="youngtalents.Aufgaben"></activity>
+        <activity android:name="youngtalents.Ersteller"></activity>
+        <activity android:name="youngtalents.Logout"></activity>
 
 
     </application>

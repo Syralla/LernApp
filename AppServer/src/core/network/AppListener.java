@@ -3,11 +3,15 @@ package core.network;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import core.Configuration;
@@ -63,13 +67,19 @@ public class AppListener {
 					readTasks(br);
 					break;
 				case 1: //PushStatistic
-					pushStatistics(pw);
+					//pushStatistics(pw);
 					break;
 				case 2: //Login
-					Login(br);
+					//if(Login(br) == true){
+						PrintStream p = new PrintStream(so.getOutputStream());
+						p.println("true");
+						System.out.println("true");
+						p.flush();
+						p.close();
+					//};
 					break;
 				case 3: //Register
-					Register(br);
+					//Register(br);
 					break;
 				}
 
@@ -119,12 +129,11 @@ public class AppListener {
 
 	}
 	//Login Methode
-	private void Login(BufferedReader br) throws IOException, SQLException{
+	private boolean Login(BufferedReader br) throws IOException, SQLException{
 		String xmlFile = "";
 		String user = "";
 		String pasw = "";
-		String sql = "";
-		ResultSet rs = null;
+		
 		
 		for (String line = null; (line = br.readLine()) != null;){
 			xmlFile = xmlFile + line;
@@ -136,16 +145,44 @@ public class AppListener {
 		
 		user = list.get(0);
 		pasw = list.get(1);
-		DBConnector db = new DBConnector();
-		sql = "SELECT * FROM user WHERE user = '" + user + "' AND pasw = '" + pasw + "';";
-		rs = db.select(sql);
 		
-		while (rs.next()){ //Wenn ein Resultset vorhanden ist wird ein success zurück gesendet an die App
+		String SQLIP = "jdbc:mysql://localhost:3306/Lernapp";
+		String DBUSER = "root";
+		 String DBPW = "LernApp";
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		String sql1 = "SELECT * FROM user WHERE user = '" + user + "' AND pasw = '" + pasw + "';";
+		
+		
+		try {
+			// 1. Get a connection to database
+			myConn = DriverManager.getConnection(SQLIP, DBUSER , DBPW);
 			
+			// 2. Create a statement
+			myStmt = myConn.createStatement();
 			
-			System.out.println("Login geglückt");
+			// 3. Execute SQL query
+			myRs = myStmt.executeQuery(sql1);
+			
+			// 4. Process the result set
 			
 		}
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		
+		
+		
+		
+		while (myRs.next()){ //Wenn ein Resultset vorhanden ist wird ein success zurück gesendet an die App
+			
+			return true;
+			
+			
+		}
+		
+		return false;
 	}
 	
 	private void Register(BufferedReader br) throws IOException, SQLException{
@@ -168,9 +205,13 @@ public class AppListener {
 		pasw = list.get(1);
 		email = list.get(2);
 		
+		if(user != null && pasw != null && email != null){
+			
+		
 		DBConnector db = new DBConnector();
 		sql = "INSERT INTO user (user, pasw, email) VALUES ('" + user + "', '" + pasw + "', '" + email + "');";
 		db.insert(sql);
+		}
 		
 	}
 }

@@ -7,7 +7,7 @@ import java.sql.*;
 public class DBConnector {
 	
 	
-	public static String SQLIP = "jdbc:mysql://localhost:3306/Lernapp";
+	public static String SQLIP = "jdbc:mysql://simon-f.com:3306/Lernapp";
 	public static String DBUSER = "root";
 	public static String DBPW = "LernApp";
 	Connection myConn = null;
