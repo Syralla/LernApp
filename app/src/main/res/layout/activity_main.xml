@@ -19,6 +19,21 @@
 
     tools:context=".MainActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bitte wähle mindestens eine Rechenart und eine Zahlenkategorie:"
+        android:id="@+id/aufgabenpaket_view"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:layout_centerHorizontal="true" />
+
     <Button
         android:id="@+id/button"
         android:gravity="center"
@@ -55,8 +70,8 @@
         android:text="Plus"
         android:textColor="#ffffff"
         android:textSize="20sp"
-        android:layout_marginTop="19dp"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="32dp"
+        android:layout_below="@+id/aufgabenpaket_view"
         android:layout_toRightOf="@+id/Aufgabe"
         android:layout_toEndOf="@+id/Aufgabe" />
 
