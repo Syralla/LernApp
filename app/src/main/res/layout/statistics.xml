@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+
+    android:paddingRight="@dimen/activity_horizontal_margin"
+
+    android:paddingTop="@dimen/activity_vertical_margin"
+
+    android:paddingBottom="@dimen/activity_vertical_margin"
+
+    android:background="#08253c"
+
+    tools:context=".MainActivity">
+
+    <TextView
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:text="Hier findest Du Deine Statistik"
+
+        android:id="@+id/statistic_view"
+
+        android:textColor="#ffffff"
+
+        android:textSize="20sp"
+
+        android:layout_marginTop="20dp"
+
+        android:layout_marginLeft="10dp"
+
+        android:layout_marginStart="10dp"
+
+        android:layout_alignParentTop="true"
+
+        android:layout_alignParentLeft="true"
+
+        android:gravity="center"
+
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="So viele Aufgaben hast du richtig:"
+        android:id="@+id/rightanswers"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:layout_marginTop="100dp"
+        android:layout_below="@+id/statistic_view"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Insgesamt: x von x:"
+        android:id="@+id/rightwrong"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Plus: x von x"
+        android:id="@+id/plusstat"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:layout_marginTop="170dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Minus: x von x"
+        android:id="@+id/minusstat"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mal: x von x"
+        android:id="@+id/malstat"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:layout_marginTop="230dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Geteilt: x von x"
+        android:id="@+id/geteiltstat"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:layout_marginTop="260dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -92,19 +93,20 @@ public class MainActivity extends AppCompatActivity {
                       }
                        else{
 
-
-
+                           loginfail();
+                           System.out.println("Debug Inside Else");
 
 
                            /////Popup for false login
                        }
                     } catch (IOException e) {
                         e.printStackTrace();
+
                     }
 
 
                 } else {
-                    Toast.makeText(getApplicationContext(), "Internet ist nicht verfügbar.", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -333,6 +335,19 @@ public class MainActivity extends AppCompatActivity {
 
 //#################################### popup login fail #########################################
 
+    public void loginfail (){
+
+        runOnUiThread(new Runnable(){
+            @Override
+            public void run(){
+                Toast fail = null;
+                fail.makeText(MainActivity.this, "Benutzername und Passwort stimmen nicht überein.", fail.LENGTH_SHORT).show();
+                fail.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fail.show();
+            }
+        });
+
+    }
 
 
 
