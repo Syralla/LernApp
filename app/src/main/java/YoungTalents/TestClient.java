@@ -16,6 +16,7 @@ public class TestClient {
 	private String serverIP = "simon-f.com";// Surface IP, da Emulator Vm
 	private int port = 8080;
 	public static boolean ret = false;
+	public static String tasks = "";
 
 	public TestClient() {
 		// TODO Auto-generated constructor stub
@@ -75,9 +76,9 @@ public class TestClient {
 	 * danach connectToServer --> L�cke schlie�en
 	 * @param builder
 	 */
-	public void sendAufgabe(final FileBuilder builder) {
+	public String sendAufgabe(final int spez) {
 
-        System.out.println("Sende Aufgabe");
+		String ret = "";
 
 		Runnable r = new Runnable(){
 
@@ -86,16 +87,15 @@ public class TestClient {
 				NetworkAction action = new NetworkAction() {
 
 					@Override
-					public void performAction(PrintWriter pw, BufferedReader br) {
+					public void performAction(PrintWriter pw, BufferedReader br) throws IOException {
 
-						List<String> lines = builder.buildFileAsStringArray();
 
-						pw.println(0);//heist sende Aufgabe
+
+						pw.println(0);//heist erstelle Aufgaben
 						pw.flush();
+						pw.println(spez);
+						TestClient.tasks = br.readLine();
 
-						for (String line : lines) {
-							pw.println(line);
-						}
 
 					}
 				};
@@ -106,6 +106,11 @@ public class TestClient {
 
     Thread t = new Thread(r);
         t.start();
+		while (t.isAlive()){
+
+		}
+
+		return TestClient.tasks;
 
 	}
 
@@ -133,6 +138,7 @@ public class TestClient {
 
 		Thread t = new Thread(r);
 		t.start();
+
 
 	}
 

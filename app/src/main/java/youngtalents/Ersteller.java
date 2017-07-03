@@ -2,6 +2,8 @@ package youngtalents;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +27,7 @@ public class Ersteller extends Activity {
     CheckBox drei;
     TextView txt;
     int anforderungen;
+    String ret;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +41,8 @@ public class Ersteller extends Activity {
         eins = (CheckBox) findViewById(R.id.Ein);
         zwei = (CheckBox) findViewById(R.id.Zwei);
         drei = (CheckBox) findViewById(R.id.Drei);
-        txt = (TextView) findViewById(R.id.aufgabenpaket_view);
+        txt = (TextView) findViewById(R.id.checkbox_view);
+
 
 
 
@@ -50,6 +54,49 @@ public class Ersteller extends Activity {
 
                 if(checkkat() == true && checkste() == true){ //Nur wenn eine Kategorie und eine Stelle ausgewählt ist, passiert etwas.
 
+                    if(internetAvailable()){
+
+                        anforderungen = 11111111;
+
+                        if(plus.isChecked() != true){
+                            anforderungen = anforderungen - 1000000;
+                        }
+                        if(min.isChecked() != true){
+                            anforderungen = anforderungen - 100000;
+                        }
+                        if(mul.isChecked() != true){
+                            anforderungen = anforderungen - 10000;
+                        }
+                        if(div.isChecked() != true){
+                            anforderungen = anforderungen - 1000;
+                        }
+                        if(eins.isChecked() != true){
+                            anforderungen = anforderungen - 100;
+                        }
+                        if(zwei.isChecked() != true){
+                            anforderungen = anforderungen - 10;
+                        }
+                        if(drei.isChecked() != true){
+                            anforderungen = anforderungen - 1;
+                        }
+
+
+
+                        TestClient client = new TestClient();
+
+                        ret = client.sendAufgabe(anforderungen);
+
+                        XMLParser parser = new XMLParser();
+
+
+
+
+
+
+
+                    }
+
+
                 }
                 else{
                     if(checkkat() == true){
@@ -59,7 +106,7 @@ public class Ersteller extends Activity {
                         txt.setText("Bitte wähle noch eine Rechenart aus!");
 
                     }
-                    
+
                 }
 
             }
@@ -95,5 +142,11 @@ public class Ersteller extends Activity {
         else{
             return false;
         }
+    }
+
+    public boolean internetAvailable(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnectedOrConnecting();
     }
 }

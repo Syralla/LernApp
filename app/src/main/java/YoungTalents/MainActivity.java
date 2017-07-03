@@ -260,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     //</editor-fold>
-    */
+
 
     private Aufgabe[] generateAufgabe(boolean plus, boolean minus, boolean mal, boolean geteilt) {
 
