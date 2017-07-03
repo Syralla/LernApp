@@ -6,6 +6,12 @@ public class Aufgabe {
 	private int number2;
 	private Operations op;
 
+	 /*
+	 * Funktion zur Erstellung einer Aufgabe:
+	 * Sie besteht aus 2 zufälligen Zahlen und einer Operation
+	 * */
+
+
 	public Aufgabe(int number1, int number2, Operations op) {
 		this.number1 = number1;
 		this.number2 = number2;
