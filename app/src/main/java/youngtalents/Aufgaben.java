@@ -26,12 +26,17 @@ public class Aufgaben extends Activity {
     public int ergebnis;
     public boolean richtig;
     TextView user_t;
+    TextView correct;
+    TextView false_a;
     Button menu;
     Button check;
     EditText erg;
     public static int z1;
     public static int z2;
     public static String oper;
+    public static String task_davor;
+    public static String answer_davor;
+    public static boolean task_davor_b;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +50,8 @@ public class Aufgaben extends Activity {
         System.out.println(spez);
         task.setText(firstTask(spez));
         erg = (EditText) findViewById(R.id.result);
+        correct = (TextView) findViewById(R.id.correctanswer);
+        false_a = (TextView) findViewById(R.id.falseanswer);
 
 
 
@@ -56,8 +63,21 @@ public class Aufgaben extends Activity {
 
                 if(erg.getText().toString() != null){
 
+                    Aufgaben.task_davor = task.getText().toString();
+                    Aufgaben.answer_davor = erg.getText().toString();
                     checkanswer(spez, SaveSharedPreference.getUserID(getApplicationContext()));
                     task.setText(nextTask(spez));
+                    if(task_davor_b){ //wenn die antwort davor korrekt war wird es hier im grünen text angezeigt
+                        false_a.setText("");
+                        correct.setText(task_davor + " =  " + answer_davor);
+
+                    }
+                    else{
+                        correct.setText("");
+                        false_a.setText(task_davor + " =  " + answer_davor);
+
+
+                    }
                 }
 
 
@@ -226,6 +246,7 @@ public class Aufgaben extends Activity {
                 break;
 
         }
+        Aufgaben.task_davor_b = ret;
         System.out.println(ret);
         TestClient c = new TestClient();
 
