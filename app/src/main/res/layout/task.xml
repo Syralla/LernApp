@@ -95,7 +95,7 @@
         android:textSize="20sp"
         android:textColor="#FF0000"
         android:id="@+id/loginfail"
-        android:layout_below="@+id/keepmeloggedin"
+        android:layout_below="@+id/corr"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp" />
 
