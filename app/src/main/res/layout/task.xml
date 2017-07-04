@@ -87,5 +87,18 @@
         android:layout_alignParentStart="true" />
 
 
+    <TextView
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20sp"
+        android:textColor="#FF0000"
+        android:id="@+id/loginfail"
+        android:layout_below="@+id/keepmeloggedin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp" />
+
+
 
 </RelativeLayout>
