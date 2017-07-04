@@ -52,9 +52,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("Point one");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
+
+        if(SaveSharedPreference.getUserName(MainActivity.this).length() == 0)
+        {
+
+        }
+        else
+        {
+            Intent myIntent = new Intent(getApplicationContext(), MainMenu.class);
+            startActivityForResult(myIntent, 0);
+
+        }
+        System.out.println("Point one");
+
+
+
 
         user = (EditText) findViewById(R.id.username_field_r);
         pasw = (EditText) findViewById(R.id.password_field_r);
@@ -103,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     //client.sendAufgabe(builder);
                     try {
                        if(client.Login(builder.buildLoginAsStringArray(user.getText().toString(), pasw.getText().toString())) == true){
+                           SaveSharedPreference.setUserName(getApplicationContext(), user.getText().toString());
                            Intent myIntent = new Intent(v.getContext(), MainMenu.class);
                            startActivityForResult(myIntent, 0);
 

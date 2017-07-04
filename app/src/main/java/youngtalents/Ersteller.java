@@ -82,11 +82,10 @@ public class Ersteller extends Activity {
 
 
 
-                        TestClient client = new TestClient();
+                        Intent myIntent = new Intent(v.getContext(), Aufgaben.class);
+                        myIntent.putExtra("anforderungen", anforderungen);
+                        startActivity(myIntent);
 
-                        ret = client.sendAufgabe(anforderungen);
-
-                        XMLParser parser = new XMLParser();
 
 
 
