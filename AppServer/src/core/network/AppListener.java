@@ -70,13 +70,19 @@ public class AppListener {
 					//pushStatistics(pw);
 					break;
 				case 2: //Login
+					PrintStream p = new PrintStream(so.getOutputStream());
 					if(Login(br) == true){
-						PrintStream p = new PrintStream(so.getOutputStream());
+						
 						p.println("true");
 						System.out.println("true");
+					}
+					else{
+						p.println("false");
+						System.out.println("false");
+					}
 						p.flush();
 						p.close();
-					};
+					
 					break;
 				case 3: //Register
 					Register(br);
