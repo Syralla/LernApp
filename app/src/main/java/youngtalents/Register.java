@@ -38,7 +38,6 @@ public class Register extends Activity{
 
                     FileBuilder builder = new FileBuilder();
 
-
                     TestClient client = new TestClient();
 
                     client.Register(builder.buildRegisterAsStringArray(user.getText().toString(), pasw.getText().toString(), email.getText().toString()));
