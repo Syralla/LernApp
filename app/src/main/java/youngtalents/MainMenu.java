@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -19,6 +20,7 @@ public class MainMenu extends Activity {
     Button btn_erstellen;
     Button btn_statistik;
     Button btn_ausloggen;
+    TextView user_t;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +30,8 @@ public class MainMenu extends Activity {
         btn_erstellen = (Button) findViewById(R.id.edittasks);
         btn_ausloggen = (Button) findViewById(R.id.logout);
         btn_statistik = (Button) findViewById(R.id.statistic);
-
+        user_t = (TextView) findViewById(R.id.user);
+        user_t.setText(SaveSharedPreference.getUserID(getApplicationContext()));
 
 
 
@@ -56,6 +59,7 @@ public class MainMenu extends Activity {
             @Override
             public void onClick(View v) {
                 SaveSharedPreference.setUserName(getApplicationContext(), "");
+                SaveSharedPreference.setUserID(getApplicationContext(), "");
                 Intent myIntent = new Intent(v.getContext(), Logout.class);
                 startActivityForResult(myIntent, 0);
 

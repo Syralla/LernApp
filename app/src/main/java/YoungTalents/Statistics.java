@@ -34,13 +34,16 @@ public class Statistics extends Activity { //Deklaration der benötigten Layout 
 
     TextView malstat;
     String ret;
+    TextView user_t;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.statistics);
         TestClient client = new TestClient();
         String user;
-        user = SaveSharedPreference.getUserName(getApplicationContext());
+        user = SaveSharedPreference.getUserID(getApplicationContext());
+        user_t = (TextView) findViewById(R.id.user);
+        user_t.setText(SaveSharedPreference.getUserID(getApplicationContext()));
 
         ret = client.getStatisticsFromServer(user);
 

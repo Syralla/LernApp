@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
 
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn;
     Button reg;
     CheckBox logged;
+    TextView fail;
 
     String xml;
 
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         pasw = (EditText) findViewById(R.id.password_field_r);
         btn = (Button) findViewById(R.id.login);
         reg = (Button) findViewById(R.id.register_button);
+        fail = (TextView) findViewById(R.id.loginfail);
 
 
 
@@ -121,19 +124,21 @@ public class MainActivity extends AppCompatActivity {
                            if(logged.isChecked()) {
 
 
-                               SaveSharedPreference.setUserName(getApplicationContext(), user.getText().toString());
+                               SaveSharedPreference.setUserName(getApplicationContext(), user.getText().toString()); //User abspeichern für logged in
+
                            }
+                           SaveSharedPreference.setUserID(getApplicationContext(), user.getText().toString()); //Username abspeichern für anzeige
                            Intent myIntent = new Intent(v.getContext(), MainMenu.class);
                            startActivityForResult(myIntent, 0);
 
                       }
                        else{
 
-                           loginfail();
-                           System.out.println("Debug Inside Else");
+
+                           fail.setText("Dein Benutzername und dein Passwort passen nicht zusammen. Hast du dich vielleicht vertippt?");
 
 
-                           /////Popup for false login
+
                        }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -371,19 +376,11 @@ public class MainActivity extends AppCompatActivity {
 
 //#################################### popup login fail #########################################
 
-    public void loginfail (){
 
-        runOnUiThread(new Runnable(){
-            @Override
-            public void run(){
-                Toast fail = null;
-                fail.makeText(MainActivity.this, "Benutzername und Passwort stimmen nicht überein.", fail.LENGTH_SHORT).show();
-                fail.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                fail.show();
-            }
-        });
 
-    }
+
+
+
 
 
 

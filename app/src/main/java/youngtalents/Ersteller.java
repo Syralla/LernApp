@@ -28,6 +28,7 @@ public class Ersteller extends Activity {
     TextView txt;
     int anforderungen;
     String ret;
+    TextView user_t;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +43,8 @@ public class Ersteller extends Activity {
         zwei = (CheckBox) findViewById(R.id.Zwei);
         drei = (CheckBox) findViewById(R.id.Drei);
         txt = (TextView) findViewById(R.id.checkbox_view);
+        user_t = (TextView) findViewById(R.id.user);
+        user_t.setText(SaveSharedPreference.getUserID(getApplicationContext()));
 
 
 
