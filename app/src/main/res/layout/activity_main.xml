@@ -32,7 +32,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="61dp"
-        android:text="Aufgabenpaket erstellen"
         android:text="Aufgaben rechnen"
         android:layout_below="@+id/Drei"
         android:layout_centerHorizontal="true" />
