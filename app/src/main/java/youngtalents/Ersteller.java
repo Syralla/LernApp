@@ -10,11 +10,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-/**
- * Created by Simon on 01.07.2017.
- */
 
-public class Ersteller extends Activity {
+
+public class Ersteller extends Activity { //DIese Activity dient dazu, dass der User entscheiden kann, was für Aufgaben er bearbeiten will
 
     //Deklaration der benötigten Layout Elemente
     Button btn;
@@ -27,7 +25,7 @@ public class Ersteller extends Activity {
     CheckBox drei;
     TextView txt;
     int anforderungen;
-    String ret;
+
     TextView user_t;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -44,10 +42,7 @@ public class Ersteller extends Activity {
         drei = (CheckBox) findViewById(R.id.Drei);
         txt = (TextView) findViewById(R.id.checkbox_view);
         user_t = (TextView) findViewById(R.id.user);
-        user_t.setText(SaveSharedPreference.getUserID(getApplicationContext()));
-
-
-
+        user_t.setText(SaveSharedPreference.getUserID(getApplicationContext())); //Wieder wird der Username gesetzt auf das klar ist, wer eingeloggt ist
 
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -55,56 +50,50 @@ public class Ersteller extends Activity {
             public void onClick(View v) {
 
 
-                if(checkkat() == true && checkste() == true){ //Nur wenn eine Kategorie und eine Stelle ausgewählt ist, passiert etwas.
+                if (checkkat() == true && checkste() == true) { //Nur wenn eine Kategorie und eine Stelle ausgewählt ist, passiert etwas.
 
-                    if(internetAvailable()){
+                    if (internetAvailable()) {
 
                         anforderungen = 11111111;
 
-                        if(plus.isChecked() != true){
+                        if (plus.isChecked() != true) {                     //Hier wird der Schlüssel der zum Kategorisieren der Aufgaben benutzt wird erstellt
+                                                                            //Dieser Schlüssel ist 9 Stellig. Die erste Stelle ist immer eine 1 um einen festen Startpunkt zu haben
+                                                                            //Die nächsten 4 Stellen geben die Rechenart an und die letzten 3 Stellen geben die Stellenanzahl der Aufgabe an
+                                                                            //  Beispiel : 11001010 bedeutet, dass die Aufgabe entweder plus oder geteilt seind darf und das sie zweistellig ist
                             anforderungen = anforderungen - 1000000;
                         }
-                        if(min.isChecked() != true){
+                        if (min.isChecked() != true) {
                             anforderungen = anforderungen - 100000;
                         }
-                        if(mul.isChecked() != true){
+                        if (mul.isChecked() != true) {
                             anforderungen = anforderungen - 10000;
                         }
-                        if(div.isChecked() != true){
+                        if (div.isChecked() != true) {
                             anforderungen = anforderungen - 1000;
                         }
-                        if(eins.isChecked() != true){
+                        if (eins.isChecked() != true) {
                             anforderungen = anforderungen - 100;
                         }
-                        if(zwei.isChecked() != true){
+                        if (zwei.isChecked() != true) {
                             anforderungen = anforderungen - 10;
                         }
-                        if(drei.isChecked() != true){
+                        if (drei.isChecked() != true) {
                             anforderungen = anforderungen - 1;
                         }
 
 
-
                         Intent myIntent = new Intent(v.getContext(), Aufgaben.class);
-                        myIntent.putExtra("anforderungen", ("" + anforderungen));
+                        myIntent.putExtra("anforderungen", ("" + anforderungen)); //Hier wird beim aufrufen der neuen Activität ein Parameter mitgeben um diesen in der neuen Aktivität verfügbar zu machen
                         startActivity(myIntent);
 
 
-
-
-
-
-
-
                     }
 
 
-                }
-                else{
-                    if(checkkat() == true){
+                } else {
+                    if (checkkat() == true) { //falls nicht mindestens eine Stelle und eine Rechenart angeklickt ist wird das hier abgefangen
                         txt.setText("Bitte wähle noch eine Anzahl von Stellen aus!");
-                    }
-                    else if(checkste() == true){
+                    } else if (checkste() == true) {
                         txt.setText("Bitte wähle noch eine Rechenart aus!");
 
                     }
@@ -115,38 +104,22 @@ public class Ersteller extends Activity {
         });
 
 
-
-
-
-
     }
 
 
-    public  boolean checkkat(){ //Methode um zu checken ob mindestens eine Kategorie ausgewählt wurde
+    public boolean checkkat() { //Methode um zu checken ob mindestens eine Kategorie ausgewählt wurde
 
 
-
-        if(plus.isChecked() == true || min.isChecked() == true || mul.isChecked() == true || div.isChecked() == true){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return plus.isChecked() == true || min.isChecked() == true || mul.isChecked() == true || div.isChecked() == true;
     }
 
-    public  boolean checkste(){ // methode um zu checken ob mindestens eine Stellen Anzahl ausgewählt wurde
+    public boolean checkste() { // methode um zu checken ob mindestens eine Stellen Anzahl ausgewählt wurde
 
 
-
-        if(eins.isChecked() == true || zwei.isChecked() == true || drei.isChecked() == true ){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return eins.isChecked() == true || zwei.isChecked() == true || drei.isChecked() == true;
     }
 
-    public boolean internetAvailable(){
+    public boolean internetAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnectedOrConnecting();

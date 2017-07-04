@@ -1,33 +1,15 @@
 package youngtalents;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.widget.Button;
-
-
-/**
- * Created by Samara on 19.06.2017.
- */
-
-
-
-import android.view.View;
-import android.widget.Button;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.widget.CheckBox;
 import android.widget.TextView;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
-import android.widget.Toast;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 
 public class Statistics extends Activity { //Deklaration der benötigten Layout Elemente
@@ -59,9 +41,9 @@ public class Statistics extends Activity { //Deklaration der benötigten Layout 
         geteiltstat = (TextView) findViewById(R.id.geteiltstat);
 
         System.out.println(ret);
-        for (Element e : doc.select("statistic")) {
+        for (Element e : doc.select("statistic")) { //Hier wird aus dem XML Document ein Element ausgelesen
 
-            allanswers.setText("Insgesamt: " + e.select("richtig").text() + " von " + e.select("gesamt").text());
+            allanswers.setText("Insgesamt: " + e.select("richtig").text() + " von " + e.select("gesamt").text()); //Aus diesem Element können dann die einzelenen Werte ausgelesen werden
             plusstat.setText("Plus: " + e.select("plusrichtig").text() + " von " + e.select("plusgesamt").text());
             minusstat.setText("Minus: " + e.select("minusrichtig").text() + " von " + e.select("minusgesamt").text());
             malstat.setText("Mal: " + e.select("malrichtig").text() + " von " + e.select("malgesamt").text());
@@ -72,9 +54,7 @@ public class Statistics extends Activity { //Deklaration der benötigten Layout 
     }
 
 
-
-
-    public boolean internetAvailable(){
+    public boolean internetAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnectedOrConnecting();

@@ -6,12 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-/**
- * Created by Simon on 01.07.2017.
- */
-
-public class Logout extends Activity {
+public class Logout extends Activity { //Die Logout Activity bestätigt den Logut und führt zur Login Activität
     Button btn;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logout_success);

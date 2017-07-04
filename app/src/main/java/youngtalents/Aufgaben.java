@@ -12,31 +12,22 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 
-
-
-/**
- * Created by Simon on 01.07.2017.
- */
-
-
 public class Aufgaben extends Activity {
 
-    public String spez;
-    TextView task;
-    public int ergebnis;
-    public boolean richtig;
-    TextView user_t;
-    TextView correct;
-    TextView false_a;
-    Button menu;
-    Button check;
-    EditText erg;
     public static int z1;
     public static int z2;
     public static String oper;
     public static String task_davor;
     public static String answer_davor;
     public static boolean task_davor_b;
+    public String spez;
+    TextView task;
+    TextView user_t;
+    TextView correct;
+    TextView false_a;
+    Button menu;
+    Button check;
+    EditText erg;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,25 +45,22 @@ public class Aufgaben extends Activity {
         false_a = (TextView) findViewById(R.id.falseanswer);
 
 
-
-
         check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                if(erg.getText().toString() != null){
+                if (erg.getText().toString() != null) {
 
                     Aufgaben.task_davor = task.getText().toString();
                     Aufgaben.answer_davor = erg.getText().toString();
                     checkanswer(spez, SaveSharedPreference.getUserID(getApplicationContext()));
                     task.setText(nextTask(spez));
-                    if(task_davor_b){ //wenn die antwort davor korrekt war wird es hier im grünen text angezeigt
+                    if (task_davor_b) { //wenn die antwort davor korrekt war wird es hier im grünen text angezeigt
                         false_a.setText("");
                         correct.setText(task_davor + " =  " + answer_davor);
 
-                    }
-                    else{
+                    } else {
                         correct.setText("");
                         false_a.setText(task_davor + " =  " + answer_davor);
 
@@ -82,19 +70,8 @@ public class Aufgaben extends Activity {
                 }
 
 
-
-
             }
         });
-
-
-
-
-
-
-
-
-
 
 
         menu.setOnClickListener(new View.OnClickListener() {
@@ -108,13 +85,9 @@ public class Aufgaben extends Activity {
         });
 
 
-
-
-
-
     }
 
-    public String firstTask(String spez){
+    public String firstTask(String spez) {
 
         TestClient c = new TestClient();
 
@@ -127,7 +100,7 @@ public class Aufgaben extends Activity {
         for (Element e : doc.select("aufgabe")) {
             int zahl1 = 0;
             int zahl2 = 0;
-            String op =  "";
+            String op = "";
 
             zahl1 = Integer.parseInt(e.select("zahl1").text());
             zahl2 = Integer.parseInt(e.select("zahl2").text());
@@ -136,7 +109,7 @@ public class Aufgaben extends Activity {
             Aufgaben.z2 = zahl2;
             Aufgaben.oper = op;
 
-            switch (op){
+            switch (op) {
                 case "plus":
                     ret = zahl1 + "  +  " + zahl2;
                     break;
@@ -159,11 +132,9 @@ public class Aufgaben extends Activity {
         return ret;
 
 
-
-
     }
 
-    public String nextTask(String spez){
+    public String nextTask(String spez) {
 
         TestClient c = new TestClient();
 
@@ -176,7 +147,7 @@ public class Aufgaben extends Activity {
         for (Element e : doc.select("aufgabe")) {
             int zahl1 = 0;
             int zahl2 = 0;
-            String op =  "";
+            String op = "";
 
             zahl1 = Integer.parseInt(e.select("zahl1").text());
             zahl2 = Integer.parseInt(e.select("zahl2").text());
@@ -185,7 +156,7 @@ public class Aufgaben extends Activity {
             Aufgaben.z2 = zahl2;
             Aufgaben.oper = op;
 
-            switch (op){
+            switch (op) {
                 case "plus":
 
                     ret = zahl1 + "  +  " + zahl2;
@@ -207,44 +178,43 @@ public class Aufgaben extends Activity {
         }
 
 
-
         return ret;
 
     }
 
-    public void checkanswer(String spez, String user){
+    public void checkanswer(String spez, String user) {
         boolean ret = false;
         int er;
         String err;
 
-        switch(oper){
+        switch (oper) {
             case "plus":
                 er = Aufgaben.z1 + Aufgaben.z2;
                 spez = "11000000";
 
                 System.out.println(erg.getText().toString());
-                if( (er + "").equals(erg.getText().toString())){
+                if ((er + "").equals(erg.getText().toString())) {
                     ret = true;
                 }
                 break;
             case "minus":
                 er = Aufgaben.z1 - Aufgaben.z2;
                 spez = "10100000";
-                if( (er + "").equals(erg.getText().toString())){
+                if ((er + "").equals(erg.getText().toString())) {
                     ret = true;
                 }
                 break;
             case "mult":
                 er = Aufgaben.z1 * Aufgaben.z2;
                 spez = "10010000";
-                if( (er + "").equals(erg.getText().toString())){
+                if ((er + "").equals(erg.getText().toString())) {
                     ret = true;
                 }
                 break;
             case "div":
                 er = Aufgaben.z1 / Aufgaben.z2;
                 spez = "10001000";
-                if( (er + "").equals(erg.getText().toString())){
+                if ((er + "").equals(erg.getText().toString())) {
                     ret = true;
                 }
                 break;
@@ -255,12 +225,6 @@ public class Aufgaben extends Activity {
         TestClient c = new TestClient();
 
         c.check(spez, ret, user);
-
-
-
-
-
-
 
 
     }

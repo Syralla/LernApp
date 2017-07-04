@@ -10,11 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-/**
- * Created by Simon on 28.06.2017.
- */
 
-public class Register extends Activity{
+public class Register extends Activity {
 
     EditText user;
     EditText pasw;
@@ -34,7 +31,7 @@ public class Register extends Activity{
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(internetAvailable()){
+                if (internetAvailable()) { //Hier wird wieder ein Builder definiert und dann eine Methode in der TestClient Klasse aufgerufen um die Registrierung durchzuführen
 
                     FileBuilder builder = new FileBuilder();
 
@@ -51,7 +48,8 @@ public class Register extends Activity{
             }
         });
     }
-    public boolean internetAvailable(){
+
+    public boolean internetAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnectedOrConnecting();
