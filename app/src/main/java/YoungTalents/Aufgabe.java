@@ -8,7 +8,7 @@ public class Aufgabe {
 
 	 /*
 	 * Funktion zur Erstellung einer Aufgabe:
-	 * Sie besteht aus 2 zufälligen Zahlen und einer Operation
+	 * Sie besteht aus 2 zufälligen Zahlen und einer Operation.
 	 * */
 
 

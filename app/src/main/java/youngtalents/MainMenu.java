@@ -51,10 +51,13 @@ public class MainMenu extends Activity {
         });
 
         btn_statistik.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
+            public void onClick(View v) {
+                Intent myIntent = new Intent(v.getContext(), Statistics.class);
+                startActivityForResult(myIntent, 0);
+
+
+        }
         });
 
         btn_ausloggen.setOnClickListener(new View.OnClickListener() {

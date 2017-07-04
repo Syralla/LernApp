@@ -11,6 +11,6 @@ public class Aufgaben extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.aufgabenpakete_view);
+        setContentView(R.layout.statistics);
     }
 }
