@@ -7,7 +7,7 @@ import java.sql.*;
 public class DBConnector {
 	
 	
-	public static String SQLIP = "jdbc:mysql://simon-f.com:3306/Lernapp";
+	public static String SQLIP = "jdbc:mysql://localhost:3306/Lernapp";
 	public static String DBUSER = "root";
 	public static String DBPW = "LernApp";
 	Connection myConn = null;
@@ -61,6 +61,38 @@ public class DBConnector {
 	}
 	
 	public boolean insert(String sql) throws SQLException{
+		
+		
+		try {
+			// 1. Get a connection to database
+			myConn = DriverManager.getConnection(SQLIP, DBUSER , DBPW);
+			// 2. Create a statement
+			myStmt = myConn.createStatement();
+			// 3. Execute SQL query
+			myStmt.executeUpdate(sql);
+			
+			} catch (Exception exc) {
+			exc.printStackTrace();
+			return false;
+			} finally {
+			if (myStmt != null) {
+			myStmt.close();
+			return false;
+			}
+			if (myConn != null) {
+			myConn.close();
+			return false;
+			}
+			}
+		
+		
+		
+		
+		
+		return true;
+	}
+	
+	public boolean update(String sql) throws SQLException{
 		
 		
 		try {

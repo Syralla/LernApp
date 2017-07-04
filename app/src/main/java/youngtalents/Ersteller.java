@@ -86,7 +86,7 @@ public class Ersteller extends Activity {
 
 
                         Intent myIntent = new Intent(v.getContext(), Aufgaben.class);
-                        myIntent.putExtra("anforderungen", anforderungen);
+                        myIntent.putExtra("anforderungen", ("" + anforderungen));
                         startActivity(myIntent);
 
 

@@ -12,7 +12,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import core.Configuration;
 import core.Queue;
@@ -55,6 +57,8 @@ public class AppListener {
 
 				br = new BufferedReader(new InputStreamReader(so.getInputStream()));
 				pw = new PrintWriter(so.getOutputStream());
+				PrintStream p = new PrintStream(so.getOutputStream());
+				PrintStream q = new PrintStream(so.getOutputStream());
 
 				int command = Integer.parseInt(br.readLine()); // TODO
 																// Gescheiter
@@ -64,13 +68,20 @@ public class AppListener {
 
 				switch (command) {
 				case 0:	//DisplayTasks
-					readTasks(br);
+					
+					
+					 
+					
+					
+					q.println(getTask(br));
+					q.flush();
+					q.close();
 					break;
 				case 1: //PushStatistic
-					//pushStatistics(pw);
+					pushStatistics(br);
 					break;
 				case 2: //Login
-					PrintStream p = new PrintStream(so.getOutputStream());
+					
 					if(Login(br) == true){
 						
 						p.println("true");
@@ -115,25 +126,119 @@ public class AppListener {
 
 	
 
-	private void readTasks(BufferedReader br) throws IOException {
+	private String getTask(BufferedReader br) throws IOException {
 
-		String xmlFile = "";
-
-		for (String line = null; (line = br.readLine()) != null;) {
-			xmlFile = xmlFile + line;
-			System.out.println("Line of XML: " + line);
+		
+		String xml = "";
+		String line = br.readLine();
+		int spez;
+		String op;
+		int st;
+		int zahl1;
+		int zahl2;
+		ArrayList<String> operations = new ArrayList<String>();
+		ArrayList<Integer> stellen = new ArrayList<Integer>();
+		//for (String lin = null; (lin = br.readLine()) != null;){
+		//	line = line + lin;
+		//	System.out.println("Line of Register Xml: " + lin);
+			
+		//}
+		if(line.length() >= 5){
+			
+		
+		System.out.println("Line of XML: " + line);
+		System.out.println("Char at 2" + line.charAt(2));
+		if(line.charAt(1) == '1'){ //Wenn die zweite Stelle 1 ist wird plus mit eingefügt
+			operations.add("plus");
 		}
+		if(line.charAt(2) == '1'){ //Wenn die dritte Stelle 1 ist wird minus mit eingefügt
+			System.out.println("test minus");
+			operations.add("minus");
+		}
+		if(line.charAt(3) == '1'){ //Wenn die vierte Stelle 1 ist wird mal mit eingefügt
+			operations.add("mult");
+		}
+		if(line.charAt(4) == '1'){ //Wenn die fünfte Stelle 1 ist wird geteilt mit eingefügt
+			operations.add("div");
+		}
+		if(line.charAt(5) == '1'){ //Wenn die sechste Stelle 1 ist wird einstellig mit eingefügt
+			stellen.add(10);
+		}
+		if(line.charAt(6) == '1'){ //Wenn die siebte Stelle 1 ist wird zweistellig mit eingefügt
+			stellen.add(100);
+		}
+		if(line.charAt(7) == '1'){ //Wenn die achte Stelle 1 ist wird dreistellig mit eingefügt
+			stellen.add(1000);
+		}
+		System.out.println("operations" + operations.size());
+		System.out.println("stellen" + stellen.size());
+		op = operations.get(ThreadLocalRandom.current().nextInt(0, operations.size()) ); //nimm eine random funktion
+		st = stellen.get(ThreadLocalRandom.current().nextInt(0, stellen.size())  ); //nimm eine random stellen anzahl
+		
+		zahl1 = 0;
+		zahl2 = 0;
+		switch (op) {
+		case "plus":
+			zahl1 = ThreadLocalRandom.current().nextInt((int) (st * 0.1) , st);
+			zahl2 = ThreadLocalRandom.current().nextInt((int) (st * 0.1) , st);
+			break;
+		case "minus" : 
+			zahl1 = ThreadLocalRandom.current().nextInt((int) (st * 0.1) , st);
+			zahl2 = ThreadLocalRandom.current().nextInt((int) (st * 0.1) , zahl1);
+			break;
+		case "mult" : 
+			zahl1 = ThreadLocalRandom.current().nextInt((int) (st * 0.1) , st);
+			zahl2 = ThreadLocalRandom.current().nextInt((int) (st * 0.1) , st);
+			
+			
+			break;
+		case "div" : 
+			if(st >= 100){
+				st = 10;
+			}
+			zahl2 = ThreadLocalRandom.current().nextInt((int) (st * 0.1) , (st / 2));
+			zahl1 = (ThreadLocalRandom.current().nextInt((int) (st * 0.1) , st) * zahl2);
+			break;
+		}
+		
+		xml = xml + "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+		xml = xml + "<aufgabe><zahl1>" + zahl1 + "</zahl1><zahl2>" + zahl2 + "</zahl2><op>" + op + "</op></aufgabe>";
+		}
+		
+		return xml;
 
+	}
+
+	private void pushStatistics(BufferedReader br) throws IOException, SQLException {
+		
+		String xmlFile = "";
+		String user = "";
+		
+		String sql = "";
+		
+		for (String line = null; (line = br.readLine()) != null;){
+			xmlFile = xmlFile + line;
+			System.out.println("Line of Register Xml: " + line);
+			
+		}
+		
 		XMLParser parser = new XMLParser();
-		List<Aufgabe> aufgaben = parser.parseAufgaben(xmlFile);
-
-		queue.handleNewTasks(aufgaben);
-
+		List<String> list = parser.parsepushstat(xmlFile);
+		
+		
+		//List[1-7] spezifizieren die Art der Aufgabe und [8] ist 1=richtig und 0 = falsch und [9] ist der username
+			
+		
+		DBConnector db = new DBConnector();
+		sql = "UPDATE Statistic SET gesamt = gesamt + 1, richtig = richtig + '" + list.get(8) + "', plusgesamt = plusgesamt + '" + list.get(0) + "', plusrichtig = plusrichtig +'" + list.get(8) + "', minusgesamt = minusgesamt + '" + list.get(1) + "', minusrichtig = minusrichtig +'" + list.get(8) + "', malgesamt = malgesamt + '" + list.get(2) + "', malrichtig = malrichtig +'" + list.get(8) + "', geteiltgesamt = geteiltgesamt + '" + list.get(3) + "', geteiltrichtig = geteiltrichtig +'" + list.get(8) + "' WHERE Statistik.username = '" + list.get(9) + "';";
+	     db.insert(sql);
+		
+		
 	}
+		
+		
 
-	private void pushStatistics(PrintWriter pw) {
-
-	}
+	
 	//Login Methode
 	private boolean Login(BufferedReader br) throws IOException, SQLException{
 		String xmlFile = "";
@@ -230,6 +335,8 @@ public class AppListener {
 		
 		DBConnector db = new DBConnector();
 		sql = "INSERT INTO user (user, pasw, email) VALUES ('" + user + "', '" + pasw + "', '" + email + "');";
+		db.insert(sql);
+		sql = "INSERT INTO Statistik (username) VALUES ('" + user + "');";
 		db.insert(sql);
 		}
 		

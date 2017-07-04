@@ -1,6 +1,8 @@
 package youngtalents;
 
 
+import junit.framework.Test;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -291,4 +293,87 @@ public class TestClient {
 
 	}
 
+    public String getTask(final String spez) {
+		System.out.println("Sende spez");
+
+		Runnable r = new Runnable(){
+
+			@Override
+			public void run() {
+				NetworkAction action = new NetworkAction() {
+
+					@Override
+					public void performAction(PrintWriter pw, BufferedReader br) throws IOException {
+
+
+
+						pw.println(0);//heist sende Register
+						pw.flush();
+						pw.println(spez);
+						pw.flush();
+						System.out.println(spez + "testin");
+
+						String in = br.readLine();
+						System.out.println(in + "testout");
+						TestClient.tasks = in;
+
+
+
+					}
+				};
+
+				connectToServer(action);	// Interface in "L�cke" speichern
+			}
+		};
+
+		Thread t = new Thread(r);
+		t.start();
+		while (t.isAlive()){
+
+		}
+
+
+		return TestClient.tasks;
+    }
+
+
+	public void check( final String spez, final boolean check, final String user){
+		System.out.println("Sende spez");
+		final String xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + "<check><spez>" + spez + "</spez><c>" + check + "</c><user>" + user + "</user></check>";
+
+
+		Runnable r = new Runnable(){
+
+			@Override
+			public void run() {
+				NetworkAction action = new NetworkAction() {
+
+					@Override
+					public void performAction(PrintWriter pw, BufferedReader br) throws IOException {
+
+
+
+						pw.println(1);//sende Ergebnisse
+						pw.flush();
+						pw.println(xml);
+						pw.flush();
+
+
+
+
+
+
+					}
+				};
+
+				connectToServer(action);	// Interface in "L�cke" speichern
+			}
+		};
+
+		Thread t = new Thread(r);
+		t.start();
+
+
+
+	}
 }
