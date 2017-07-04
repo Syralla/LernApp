@@ -3,11 +3,10 @@ package youngtalents;
 /*
 Todo:
 
-- Vom CLient zum Server schicken das er eine Aufgabenmappe will mit den spezifizierten Eigenschaften
-- Auf dem Server die Aufgaben demnach generieren und als xml/json zurück an den Client schicken
-- Auf der Client Seite die Aufgaben empfangen und local als xml abspeichern (der Code dafür ist schon vorhanden)
-- Die Aufgaben aufrufen über den Mappen Screen
-- Aufgaben bearbeiten und Ergebnisse an den Server schicken (Kategorieschlüssel + richtig/falsch)
+- Vom CLient zum Server schicken das er eine Aufgabe will
+- Aufgaben bearbeiten mit neuzuführ vom Server
+
+- Statistik an den Server schicken (Kategorieschlüssel + richtig/falsch)
 - Statistisk in der Datenbank Benutzerspezifisch abspeichern
 - Statistik vom Server an den Client schicken und darstellen
 
@@ -24,6 +23,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.content.Intent;
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     EditText pasw;
     Button btn;
     Button reg;
+    CheckBox logged;
 
     String xml;
 
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+        logged = (CheckBox) findViewById(R.id.keepmeloggedin);
         user = (EditText) findViewById(R.id.username_field_r);
         pasw = (EditText) findViewById(R.id.password_field_r);
         btn = (Button) findViewById(R.id.login);
@@ -117,7 +118,11 @@ public class MainActivity extends AppCompatActivity {
                     //client.sendAufgabe(builder);
                     try {
                        if(client.Login(builder.buildLoginAsStringArray(user.getText().toString(), pasw.getText().toString())) == true){
-                           SaveSharedPreference.setUserName(getApplicationContext(), user.getText().toString());
+                           if(logged.isChecked()) {
+
+
+                               SaveSharedPreference.setUserName(getApplicationContext(), user.getText().toString());
+                           }
                            Intent myIntent = new Intent(v.getContext(), MainMenu.class);
                            startActivityForResult(myIntent, 0);
 

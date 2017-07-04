@@ -17,6 +17,7 @@ public class TestClient {
 	private int port = 8080;
 	public static boolean ret = false;
 	public static String tasks = "";
+	public static String stat = "";
 
 	public TestClient() {
 		// TODO Auto-generated constructor stub
@@ -159,19 +160,47 @@ public class TestClient {
 		connectToServer(action);
 	}
 
-	public Statistics getStatisticsFromServer(){
+	public String getStatisticsFromServer(final String user){
 
-		NetworkAction action = new NetworkAction() {
+
+
+
+		Runnable r = new Runnable(){
+
 			@Override
-			public void performAction(PrintWriter pw, BufferedReader br) {
+			public void run() {
+				TestClient.stat = "";
+				NetworkAction action = new NetworkAction() {
 
-				pw.print(1);//heist erwarte Statistik
+					@Override
+					public void performAction(PrintWriter pw, BufferedReader br) throws IOException {
+						pw.println(4);//heist get Statistic
+						pw.flush();
+						pw.println(user);
+						String in = br.readLine();
+						stat = in;
+
+
+
+					}
+				};
+				connectToServer(action);	// Interface in "L�cke" speichern
+				System.out.println(TestClient.ret);
+
 
 
 
 			}
+
 		};
-	return null;
+
+		Thread t = new Thread(r);
+		t.start();
+		while (t.isAlive()){
+
+		}
+
+		return stat;
 	}
 
 

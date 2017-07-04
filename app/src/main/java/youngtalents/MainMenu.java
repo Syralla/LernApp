@@ -25,7 +25,7 @@ public class MainMenu extends Activity {
         setContentView(R.layout.mainmenu);
 
 
-        btn_erstellen = (Button) findViewById(R.id.createtasks);
+        btn_erstellen = (Button) findViewById(R.id.edittasks);
         btn_ausloggen = (Button) findViewById(R.id.logout);
         btn_statistik = (Button) findViewById(R.id.statistic);
 

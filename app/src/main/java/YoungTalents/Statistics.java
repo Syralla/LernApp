@@ -19,6 +19,10 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.parser.Parser;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -27,29 +31,30 @@ import java.io.PrintWriter;
 
 
 public class Statistics extends Activity { //Deklaration der benötigten Layout Elemente
-    Button btn;
-    CheckBox plus;
-    CheckBox min;
-    CheckBox mul;
-    CheckBox div;
-    CheckBox eins;
-    CheckBox zwei;
-    CheckBox drei;
-    TextView txt;
-    int anforderungen;
+
+    TextView malstat;
     String ret;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.statistics);
+        TestClient client = new TestClient();
+        String user;
+        user = SaveSharedPreference.getUserName(getApplicationContext());
+
+        ret = client.getStatisticsFromServer(user);
+
+        Document doc = Jsoup.parse(ret, "", Parser.xmlParser());
+        malstat = (TextView) findViewById(R.id.malstat);
+
+        for (Element e : doc.select("statistic")) {
+            int zahl1 = 0;
+            int zahl2 = 0;
+            String op = "";
+            malstat.setText("Du hast das als malstat" + e.select("malstat").text());
 
 
-
-
-
-
-
-
+        }
     }
 
 
