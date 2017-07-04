@@ -103,19 +103,19 @@ public class XMLParser {
 		else{
 			list.add("0");
 		}
-		if(line.charAt(5) == '1'){ //Wenn die sechste Stelle 1 ist wird einstellig mit eingefügt
+		if(line.charAt(1) == '1' && check.equals("true")){ //Wenn plus und richtig
 			list.add("1");
 		}
 		else{
 			list.add("0");
 		}
-		if(line.charAt(6) == '1'){ //Wenn die siebte Stelle 1 ist wird zweistellig mit eingefügt
+		if(line.charAt(2) == '1' && check.equals("true")){ //Wenn minus und richtig
 			list.add("1");
 		}
 		else{
 			list.add("0");
 		}
-		if(line.charAt(7) == '1'){ //Wenn die achte Stelle 1 ist wird dreistellig mit eingefügt
+		if(line.charAt(3) == '1' && check.equals("true")){ //Wenn mal und richtig
 			list.add("1");
 		}
 		else{
@@ -129,6 +129,13 @@ public class XMLParser {
 			list.add("0");
 		}
 		list.add(user);
+		
+		if(line.charAt(4) == '1' && check.equals("true")){ //Wenn geteilt und richtig
+			list.add("1");
+		}
+		else{
+			list.add("0");
+		}
 
 		return list;
 	}

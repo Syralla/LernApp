@@ -219,7 +219,7 @@ public class Aufgaben extends Activity {
         switch(oper){
             case "plus":
                 er = Aufgaben.z1 + Aufgaben.z2;
-
+                spez = "11000000";
 
                 System.out.println(erg.getText().toString());
                 if( (er + "").equals(erg.getText().toString())){
@@ -228,18 +228,21 @@ public class Aufgaben extends Activity {
                 break;
             case "minus":
                 er = Aufgaben.z1 - Aufgaben.z2;
+                spez = "10100000";
                 if( (er + "").equals(erg.getText().toString())){
                     ret = true;
                 }
                 break;
             case "mult":
                 er = Aufgaben.z1 * Aufgaben.z2;
+                spez = "10010000";
                 if( (er + "").equals(erg.getText().toString())){
                     ret = true;
                 }
                 break;
             case "div":
                 er = Aufgaben.z1 / Aufgaben.z2;
+                spez = "10001000";
                 if( (er + "").equals(erg.getText().toString())){
                     ret = true;
                 }

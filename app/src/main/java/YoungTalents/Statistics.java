@@ -32,7 +32,11 @@ import java.io.PrintWriter;
 
 public class Statistics extends Activity { //Deklaration der benötigten Layout Elemente
 
+    TextView allanswers;
+    TextView plusstat;
+    TextView minusstat;
     TextView malstat;
+    TextView geteiltstat;
     String ret;
     TextView user_t;
 
@@ -48,13 +52,20 @@ public class Statistics extends Activity { //Deklaration der benötigten Layout 
         ret = client.getStatisticsFromServer(user);
 
         Document doc = Jsoup.parse(ret, "", Parser.xmlParser());
+        allanswers = (TextView) findViewById(R.id.rightwrong);
+        plusstat = (TextView) findViewById(R.id.plusstat);
+        minusstat = (TextView) findViewById(R.id.minusstat);
         malstat = (TextView) findViewById(R.id.malstat);
+        geteiltstat = (TextView) findViewById(R.id.geteiltstat);
 
+        System.out.println(ret);
         for (Element e : doc.select("statistic")) {
-            int zahl1 = 0;
-            int zahl2 = 0;
-            String op = "";
-            malstat.setText("Du hast das als malstat" + e.select("malstat").text());
+
+            allanswers.setText("Insgesamt: " + e.select("richtig").text() + " von " + e.select("gesamt").text());
+            plusstat.setText("Plus: " + e.select("plusrichtig").text() + " von " + e.select("plusgesamt").text());
+            minusstat.setText("Minus: " + e.select("minusrichtig").text() + " von " + e.select("minusgesamt").text());
+            malstat.setText("Mal: " + e.select("malrichtig").text() + " von " + e.select("malgesamt").text());
+            geteiltstat.setText("Geteilt: " + e.select("geteiltrichtig").text() + " von " + e.select("geteiltgesamt").text());
 
 
         }

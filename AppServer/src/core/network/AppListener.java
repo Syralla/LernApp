@@ -15,6 +15,24 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.io.StringWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import core.Configuration;
 import core.Queue;
@@ -98,11 +116,22 @@ public class AppListener {
 				case 3: //Register
 					Register(br);
 					break;
+				case 4: //GetStatistic
+					p.println(getstats(br));
+					p.flush();
+					p.close();
+					break;
 				}
 
 			}
 
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TransformerException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
@@ -184,7 +213,7 @@ public class AppListener {
 			break;
 		case "minus" : 
 			zahl1 = ThreadLocalRandom.current().nextInt((int) (st * 0.1) , st);
-			zahl2 = ThreadLocalRandom.current().nextInt((int) (st * 0.1) , zahl1);
+			zahl2 = ThreadLocalRandom.current().nextInt((int) (1) , zahl1 + 1);
 			break;
 		case "mult" : 
 			zahl1 = ThreadLocalRandom.current().nextInt((int) (st * 0.1) , st);
@@ -227,11 +256,11 @@ public class AppListener {
 		System.out.println(list.toString());
 		
 		
-		//List[1-7] spezifizieren die Art der Aufgabe und [8] ist 1=richtig und 0 = falsch und [9] ist der username
+		//List[1-7] 1-4 art 5,6,7 plus/minus/mal und richtig 8 richrigallgemein 9 user 10 richtig und geteilt
 			
 		
 		DBConnector db = new DBConnector();
-		sql = "UPDATE Statistik SET gesamt = gesamt + 1, richtig = richtig + '" + list.get(7) + "', plusgesamt = plusgesamt + '" + list.get(0) + "', plusrichtig = plusrichtig +'" + list.get(7) + "', minusgesamt = minusgesamt + '" + list.get(1) + "', minusrichtig = minusrichtig +'" + list.get(7) + "', malgesamt = malgesamt + '" + list.get(2) + "', malrichtig = malrichtig +'" + list.get(7) + "', geteiltgesamt = geteiltgesamt + '" + list.get(3) + "', geteiltrichtig = geteiltrichtig +'" + list.get(7) + "' WHERE Statistik.username = '" + list.get(8) + "';";
+		sql = "UPDATE Statistik SET gesamt = gesamt + 1, richtig = richtig + '" + list.get(7) + "', plusgesamt = plusgesamt + '" + list.get(0) + "', plusrichtig = plusrichtig +'" + list.get(4) + "', minusgesamt = minusgesamt + '" + list.get(1) + "', minusrichtig = minusrichtig +'" + list.get(5) + "', malgesamt = malgesamt + '" + list.get(2) + "', malrichtig = malrichtig +'" + list.get(6) + "', geteiltgesamt = geteiltgesamt + '" + list.get(3) + "', geteiltrichtig = geteiltrichtig +'" + list.get(9) + "' WHERE Statistik.username = '" + list.get(8) + "';";
 		System.out.println(sql);
 		db.insert(sql);
 		
@@ -341,6 +370,100 @@ public class AppListener {
 		sql = "INSERT INTO Statistik (username) VALUES ('" + user + "');";
 		db.insert(sql);
 		}
+		
+	}
+	
+	
+	private String getstats(BufferedReader br) throws IOException, SQLException, ParserConfigurationException, TransformerException{
+		String xmlFile = "";
+		String user = "";
+		
+		
+		
+		
+		String line = null; 
+		line = br.readLine();
+			xmlFile = xmlFile + line;
+			System.out.println("Line of stats Xml: " + line);
+			
+		
+		
+		
+		
+		
+			
+		
+		
+		
+		user = line;
+		
+		
+		String SQLIP = "jdbc:mysql://localhost:3306/Lernapp";
+		String DBUSER = "root";
+		 String DBPW = "LernApp";
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		String sql1 = "SELECT * FROM Statistik WHERE username = '" + user + "';";
+		 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		    DocumentBuilder builder = factory.newDocumentBuilder();
+		    Document doc = builder.newDocument();
+		    Element results = doc.createElement("Results");
+		    doc.appendChild(results);
+		
+		
+		try {
+			// 1. Get a connection to database
+			myConn = DriverManager.getConnection(SQLIP, DBUSER , DBPW);
+			
+			// 2. Create a statement
+			myStmt = myConn.createStatement();
+			
+			// 3. Execute SQL query
+			myRs = myStmt.executeQuery(sql1);
+			
+			// 4. Process the result set
+			
+		}
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		
+		
+		
+		
+		ResultSetMetaData rsmd = myRs.getMetaData();
+	    int colCount = rsmd.getColumnCount();
+
+	    while (myRs.next()) {
+	      Element row = doc.createElement("statistic");
+	      results.appendChild(row);
+	      for (int i = 1; i <= colCount; i++) {
+	        String columnName = rsmd.getColumnName(i);
+	        Object value = myRs.getObject(i);
+	        Element node = doc.createElement(columnName);
+	        node.appendChild(doc.createTextNode(value.toString()));
+	        row.appendChild(node);
+	      }
+	    }
+	    DOMSource domSource = new DOMSource(doc);
+	    TransformerFactory tf = TransformerFactory.newInstance();
+	    Transformer transformer = tf.newTransformer();
+	    transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+	    transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+	    transformer.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-1");
+	    StringWriter sw = new StringWriter();
+	    StreamResult sr = new StreamResult(sw);
+	    transformer.transform(domSource, sr);
+
+	    System.out.println(sw.toString());
+
+	    myConn.close();
+	    myRs.close();
+	    System.out.println(sw.toString());
+		
+		return sw.toString();
+		
 		
 	}
 }

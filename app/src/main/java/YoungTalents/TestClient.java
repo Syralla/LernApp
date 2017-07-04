@@ -179,8 +179,10 @@ public class TestClient {
 						pw.println(4);//heist get Statistic
 						pw.flush();
 						pw.println(user);
+						pw.flush();
+
 						String in = br.readLine();
-						stat = in;
+						TestClient.stat = in;
 
 
 
@@ -202,7 +204,7 @@ public class TestClient {
 
 		}
 
-		return stat;
+		return TestClient.stat;
 	}
 
 
@@ -307,7 +309,7 @@ public class TestClient {
 
 
 
-						pw.println(0);//heist sende Register
+						pw.println(0);//heist hole Aufgabe
 						pw.flush();
 						pw.println(spez);
 						pw.flush();
