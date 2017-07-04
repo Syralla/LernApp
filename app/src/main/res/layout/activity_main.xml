@@ -32,6 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="61dp"
+        android:text="Aufgabenpaket erstellen"
         android:text="Aufgaben rechnen"
         android:layout_below="@+id/Drei"
         android:layout_centerHorizontal="true" />
@@ -109,6 +110,8 @@
         android:text="0-9"
         android:textColor="#ffffff"
         android:textSize="20sp"
+
+
         android:layout_alignBaseline="@+id/Zwei"
         android:layout_alignBottom="@+id/Zwei"
         android:layout_toLeftOf="@+id/Zwei"

@@ -1,6 +1,14 @@
 package youngtalents;
 
 import android.app.Activity;
+<<<<<<< HEAD
+
+/**
+ * Created by Samara on 19.06.2017.
+ */
+
+class Statistics extends Activity{
+=======
 import android.view.View;
 import android.widget.Button;
 import android.net.ConnectivityManager;
@@ -45,6 +53,7 @@ public class Statistics extends Activity {
         };
     }
 
+>>>>>>> origin/master
 }
 
 
