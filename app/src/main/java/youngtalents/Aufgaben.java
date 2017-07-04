@@ -78,6 +78,7 @@ public class Aufgaben extends Activity {
 
 
                     }
+                    erg.setText("");
                 }
 
 
