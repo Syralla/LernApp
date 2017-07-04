@@ -1,19 +1,24 @@
 package youngtalents;
 
 import android.app.Activity;
-<<<<<<< HEAD
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.widget.Button;
+
 
 /**
  * Created by Samara on 19.06.2017.
  */
 
-class Statistics extends Activity{
-=======
+
+
 import android.view.View;
 import android.widget.Button;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -21,46 +26,31 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 
-public class Statistics extends Activity {
-
+public class Statistics extends Activity { //Deklaration der benötigten Layout Elemente
     Button btn;
-    public String ret;
+    CheckBox plus;
+    CheckBox min;
+    CheckBox mul;
+    CheckBox div;
+    CheckBox eins;
+    CheckBox zwei;
+    CheckBox drei;
+    TextView txt;
+    int anforderungen;
+    String ret;
 
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.statistics);
 
-        System.out.println("Sende Statistik");
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                TestClient.ret = false;
-                NetworkAction action = new NetworkAction() {
 
-                    @Override
-                    public void performAction(PrintWriter pw, BufferedReader br) throws IOException {
-                        pw.println(4);
-                        pw.flush();
-                        pw.println();   //userid übergeben
-                        String in = br.readLine();
-                        ret = in;
 
-                    }
-                };
 
-            }
-        };
+
+
+
+
     }
-
->>>>>>> origin/master
-}
-
-
-
-
-
-
 
 
 
