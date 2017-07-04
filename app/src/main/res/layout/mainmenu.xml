@@ -20,33 +20,30 @@
     tools:context=".MainActivity">
 
     <TextView
-
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
-
         android:text="@string/mainmenu"
-
         android:id="@+id/mainmenu"
-
         android:textColor="#ffffff"
-
         android:textSize="30sp"
-
         android:layout_marginTop="20dp"
-
         android:layout_marginLeft="10dp"
-
         android:layout_marginStart="10dp"
-
         android:layout_alignParentTop="true"
-
         android:layout_alignParentLeft="true"
-
         android:gravity="center"
-
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:id="@+id/user"
+        android:textColor="#ffffff"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_below="@+id/mainmenu"
+        android:layout_centerHorizontal="true" />
 
     <Button
 
@@ -54,11 +51,10 @@
         android:layout_height="wrap_content"
         android:text="Aufgaben rechnen"
         android:id="@+id/edittasks"
-        android:layout_below="@id/mainmenu"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="54dp"
         android:layout_weight="1"
-        />
+        android:layout_below="@+id/user"
+        android:layout_centerHorizontal="true" />
 
 
     <Button
@@ -70,7 +66,6 @@
         android:layout_below="@+id/edittasks"
         android:layout_marginTop="42dp"
         android:layout_weight="1"
-
         android:layout_alignLeft="@+id/edittasks"
         android:layout_alignStart="@+id/edittasks"
         android:layout_alignRight="@+id/edittasks"
