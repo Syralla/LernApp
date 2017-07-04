@@ -70,16 +70,16 @@ public class AppListener {
 					//pushStatistics(pw);
 					break;
 				case 2: //Login
-					//if(Login(br) == true){
+					if(Login(br) == true){
 						PrintStream p = new PrintStream(so.getOutputStream());
 						p.println("true");
 						System.out.println("true");
 						p.flush();
 						p.close();
-					//};
+					};
 					break;
 				case 3: //Register
-					//Register(br);
+					Register(br);
 					break;
 				}
 
@@ -133,12 +133,22 @@ public class AppListener {
 		String xmlFile = "";
 		String user = "";
 		String pasw = "";
+		System.out.println("trying to login");
 		
 		
-		for (String line = null; (line = br.readLine()) != null;){
+		String line = null; 
+		line = br.readLine();
 			xmlFile = xmlFile + line;
 			System.out.println("Line of Login Xml: " + line);
+			System.out.println("eigentlich login line obendrüber");
+		
+		
+		
+		if(xmlFile.length() <= 2){
+			return false;
 		}
+		else{
+			
 		
 		XMLParser parser = new XMLParser();
 		List<String> list = parser.parseLogin(xmlFile);
@@ -175,14 +185,18 @@ public class AppListener {
 		
 		
 		
-		while (myRs.next()){ //Wenn ein Resultset vorhanden ist wird ein success zurück gesendet an die App
+		if (myRs.next() == true){ //Wenn ein Resultset vorhanden ist wird ein success zurück gesendet an die App
 			
 			return true;
 			
 			
+		}else{
+			return false;
 		}
 		
-		return false;
+		}
+		
+		
 	}
 	
 	private void Register(BufferedReader br) throws IOException, SQLException{

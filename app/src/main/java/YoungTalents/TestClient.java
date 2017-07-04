@@ -75,7 +75,7 @@ public class TestClient {
 	/**
 	 * �ber Interface Aufgaben erstellen (action) und in String List abspeichern,
 	 * danach connectToServer --> L�cke schlie�en
-	 * @param builder
+	 *
 	 */
 	public String sendAufgabe(final int spez) {
 
@@ -221,6 +221,7 @@ public class TestClient {
 						pw.println(2);//heist sende Login
 						pw.flush();
 						pw.println(line);
+						pw.flush();
 						String in = br.readLine();
 						System.out.println(in);
 						System.out.println("in test");
