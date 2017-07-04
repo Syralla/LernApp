@@ -72,13 +72,25 @@
         android:layout_alignLeft="@+id/password_field_r"
         android:layout_alignStart="@+id/password_field_r" />
 
+    <TextView
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20sp"
+        android:textColor="#FF0000"
+        android:id="@+id/loginfail"
+        android:layout_below="@+id/keepmeloggedin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login"
         android:id="@+id/login"
-        android:layout_marginTop="19dp"
-        android:layout_below="@+id/keepmeloggedin"
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/loginfail"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -86,7 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/registration_instruction"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="35dp"
         android:textSize="20sp"
         android:textColor="#ffffff"
         android:id="@+id/textView"
