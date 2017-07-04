@@ -72,7 +72,7 @@ public class XMLParser {
 		for (Element e : doc.select("check")) {
 
 			spez = e.select("spez").text();
-			check = e.select("check").text();
+			check = e.select("c").text();
 			user = e.select("user").text();
 			
 			
@@ -80,34 +80,55 @@ public class XMLParser {
 		}
 		String line = spez;
 		if(line.charAt(1) == '1'){ //Wenn die zweite Stelle 1 ist wird plus mit eingefügt
-			list.add(0, "1");
-		}
-		if(line.charAt(2) == '1'){ //Wenn die dritte Stelle 1 ist wird minus mit eingefügt
-			list.add(1, "1");
-		}
-		if(line.charAt(3) == '1'){ //Wenn die vierte Stelle 1 ist wird mal mit eingefügt
-			list.add(2, "1");
-		}
-		if(line.charAt(4) == '1'){ //Wenn die fünfte Stelle 1 ist wird geteilt mit eingefügt
-			list.add(3, "1");
-		}
-		if(line.charAt(5) == '1'){ //Wenn die sechste Stelle 1 ist wird einstellig mit eingefügt
-			list.add(4, "1");
-		}
-		if(line.charAt(6) == '1'){ //Wenn die siebte Stelle 1 ist wird zweistellig mit eingefügt
-			list.add(5, "1");
-		}
-		if(line.charAt(7) == '1'){ //Wenn die achte Stelle 1 ist wird dreistellig mit eingefügt
-			list.add(6, "1");
-		}
-		
-		if(check == "true"){
-			list.add(8, "1");
+			list.add("1");
 		}
 		else{
-			list.add(8, "0");
+			list.add("0");
 		}
-		list.add(9, user);
+		if(line.charAt(2) == '1'){ //Wenn die dritte Stelle 1 ist wird minus mit eingefügt
+			list.add("1");
+		}
+		else{
+			list.add("0");
+		}
+		if(line.charAt(3) == '1'){ //Wenn die vierte Stelle 1 ist wird mal mit eingefügt
+			list.add("1");
+		}
+		else{
+			list.add("0");
+		}
+		if(line.charAt(4) == '1'){ //Wenn die fünfte Stelle 1 ist wird geteilt mit eingefügt
+			list.add("1");
+		}
+		else{
+			list.add("0");
+		}
+		if(line.charAt(5) == '1'){ //Wenn die sechste Stelle 1 ist wird einstellig mit eingefügt
+			list.add("1");
+		}
+		else{
+			list.add("0");
+		}
+		if(line.charAt(6) == '1'){ //Wenn die siebte Stelle 1 ist wird zweistellig mit eingefügt
+			list.add("1");
+		}
+		else{
+			list.add("0");
+		}
+		if(line.charAt(7) == '1'){ //Wenn die achte Stelle 1 ist wird dreistellig mit eingefügt
+			list.add("1");
+		}
+		else{
+			list.add("0");
+		}
+		
+		if(check.equals("true")){
+			list.add("1");
+		}
+		else{
+			list.add("0");
+		}
+		list.add(user);
 
 		return list;
 	}

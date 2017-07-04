@@ -224,14 +224,16 @@ public class AppListener {
 		
 		XMLParser parser = new XMLParser();
 		List<String> list = parser.parsepushstat(xmlFile);
+		System.out.println(list.toString());
 		
 		
 		//List[1-7] spezifizieren die Art der Aufgabe und [8] ist 1=richtig und 0 = falsch und [9] ist der username
 			
 		
 		DBConnector db = new DBConnector();
-		sql = "UPDATE Statistic SET gesamt = gesamt + 1, richtig = richtig + '" + list.get(8) + "', plusgesamt = plusgesamt + '" + list.get(0) + "', plusrichtig = plusrichtig +'" + list.get(8) + "', minusgesamt = minusgesamt + '" + list.get(1) + "', minusrichtig = minusrichtig +'" + list.get(8) + "', malgesamt = malgesamt + '" + list.get(2) + "', malrichtig = malrichtig +'" + list.get(8) + "', geteiltgesamt = geteiltgesamt + '" + list.get(3) + "', geteiltrichtig = geteiltrichtig +'" + list.get(8) + "' WHERE Statistik.username = '" + list.get(9) + "';";
-	     db.insert(sql);
+		sql = "UPDATE Statistik SET gesamt = gesamt + 1, richtig = richtig + '" + list.get(7) + "', plusgesamt = plusgesamt + '" + list.get(0) + "', plusrichtig = plusrichtig +'" + list.get(7) + "', minusgesamt = minusgesamt + '" + list.get(1) + "', minusrichtig = minusrichtig +'" + list.get(7) + "', malgesamt = malgesamt + '" + list.get(2) + "', malrichtig = malrichtig +'" + list.get(7) + "', geteiltgesamt = geteiltgesamt + '" + list.get(3) + "', geteiltrichtig = geteiltrichtig +'" + list.get(7) + "' WHERE Statistik.username = '" + list.get(8) + "';";
+		System.out.println(sql);
+		db.insert(sql);
 		
 		
 	}

@@ -194,35 +194,39 @@ public class Aufgaben extends Activity {
     public void checkanswer(String spez, String user){
         boolean ret = false;
         int er;
+        String err;
 
         switch(oper){
             case "plus":
                 er = Aufgaben.z1 + Aufgaben.z2;
-                if( (er + "") == erg.getText().toString()){
+
+
+                System.out.println(erg.getText().toString());
+                if( (er + "").equals(erg.getText().toString())){
                     ret = true;
                 }
                 break;
             case "minus":
                 er = Aufgaben.z1 - Aufgaben.z2;
-                if( (er + "") == erg.getText().toString()){
+                if( (er + "").equals(erg.getText().toString())){
                     ret = true;
                 }
                 break;
             case "mult":
                 er = Aufgaben.z1 * Aufgaben.z2;
-                if( (er + "") == erg.getText().toString()){
+                if( (er + "").equals(erg.getText().toString())){
                     ret = true;
                 }
                 break;
             case "div":
                 er = Aufgaben.z1 / Aufgaben.z2;
-                if( (er + "") == erg.getText().toString()){
+                if( (er + "").equals(erg.getText().toString())){
                     ret = true;
                 }
                 break;
 
         }
-
+        System.out.println(ret);
         TestClient c = new TestClient();
 
         c.check(spez, ret, user);

@@ -340,7 +340,7 @@ public class TestClient {
 	public void check( final String spez, final boolean check, final String user){
 		System.out.println("Sende spez");
 		final String xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + "<check><spez>" + spez + "</spez><c>" + check + "</c><user>" + user + "</user></check>";
-
+		System.out.println(xml);
 
 		Runnable r = new Runnable(){
 
