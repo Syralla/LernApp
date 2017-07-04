@@ -94,8 +94,20 @@
         android:text=""
         android:textSize="20sp"
         android:textColor="#FF0000"
-        android:id="@+id/loginfail"
-        android:layout_below="@+id/corr"
+        android:id="@+id/falseanswer"
+        android:layout_below="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp" />
+
+    <TextView
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20sp"
+        android:textColor="#FF99CC00"
+        android:id="@+id/correctanswer"
+        android:layout_below="@+id/button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp" />
 
