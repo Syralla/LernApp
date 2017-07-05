@@ -56,7 +56,7 @@ public class Aufgaben extends Activity {
                     Aufgaben.answer_davor = erg.getText().toString();
                     checkanswer(spez, SaveSharedPreference.getUserID(getApplicationContext()));
                     task.setText(nextTask(spez));
-                    if (task_davor_b) { //wenn die antwort davor korrekt war wird es hier im grünen text angezeigt
+                    if (task_davor_b) { //wenn die Antwort davor korrekt war, wird es hier im grünen Text angezeigt
                         false_a.setText("");
                         correct.setText(task_davor + " =  " + answer_davor);
 
@@ -64,12 +64,9 @@ public class Aufgaben extends Activity {
                         correct.setText("");
                         false_a.setText(task_davor + " =  " + answer_davor);
 
-
                     }
                     erg.setText("");
                 }
-
-
             }
         });
 
@@ -123,14 +120,11 @@ public class Aufgaben extends Activity {
                     ret = zahl1 + "  /  " + zahl2;
 
                     break;
-
-
             }
 
         }
 
         return ret;
-
 
     }
 
@@ -171,15 +165,11 @@ public class Aufgaben extends Activity {
                     ret = zahl1 + "  /  " + zahl2;
 
                     break;
-
-
             }
-
         }
 
 
         return ret;
-
     }
 
     public void checkanswer(String spez, String user) {
